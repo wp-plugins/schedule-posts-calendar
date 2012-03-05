@@ -26,9 +26,17 @@ This section describes how to install the plugin and get it working.
 
 == Frequently Asked Questions ==
 
-= Why are there no FAQ's? =
+= What browsers are supported? =
 
-Don't have any to add at this time.
+Try it and find out, the javascript to insert the calendar is pretty standard and has been tested on:
+
+	* IE9 (note, do NOT use compatibility mode)
+	* Opera 11.6
+	* FireFox 10
+
+= Why is the calendar overlapping the other areas? =
+
+If you are using IE in compatibility mode the calendar will overlap other areas, disable compatiblity mode.
 
 == Screenshots ==
 
@@ -36,13 +44,17 @@ Don't have any to add at this time.
 
 == Changelog ==
 
+= 1.1 =
+* Minor update to reduce the size of the calendar div from 250px to 230px.
+* Added FAQ's.
+
 = 1.0 =
 * Initial release.
 
 == Upgrade Notice ==
 
-= 1.0 =
-Initial release.
+= 1.1 =
+Minor update, see changelog for details.
 
 == Roadmap ==
 
