@@ -9,7 +9,7 @@ function AddCalendar()
 		// Create a new div element and setup it's style and id to be inserted.
 		var elmnt = document.createElement("div");
 		elmnt.setAttribute('id', 'calendarHere');
-		elmnt.setAttribute('style', 'position:relative;height:250px;');
+		elmnt.setAttribute('style', 'position:relative;height:230px;');
 
 		// Insert the div we just created in to the current page as the first child under 'timestampdiv'. 
 		parent.insertBefore(elmnt,parent.firstChild);
