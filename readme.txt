@@ -19,8 +19,6 @@ This code is released under the GPL v2, see license.txt for details.
 
 == Installation ==
 
-This section describes how to install the plugin and get it working.
-
 1. Extract the archive file into your plugins directory in the schedule-posts-calendar folder.
 2. Activate the plugin in the Plugin options.
 
