@@ -59,7 +59,7 @@ function schedule_posts_calendar()
 	
 	// Register and enqueue the calender scripts.
 	wp_register_script( 'dhtmlxcalendar', $plugin_url . '/dhtmlxcalendar.js' );
-	wp_register_script( 'schedulepostscalendar', $plugin_url . '/schedule-posts-calendar.js?theme=' . $theme . '&startofweek=' . $options['startofweek'], "dhtmlxcalendar" );
+	wp_register_script( 'schedulepostscalendar', $plugin_url . '/schedule-posts-calendar.js?theme=' . $theme . '&startofweek=' . $options['startofweek'] . '&popupcalendar=' . $options['popup-calendar'], "dhtmlxcalendar" );
 	wp_enqueue_script( 'dhtmlxcalendar' );
 	wp_enqueue_script( 'schedulepostscalendar' );
 	}
@@ -75,6 +75,7 @@ function schedule_posts_calendar_admin_page()
 		if( !isset( $_POST['schedule_posts_calendar']['startofweek'] ) ) { $_POST['schedule_posts_calendar']['startofweek'] = 7; }
 		if( !isset( $_POST['schedule_posts_calendar']['theme'] ) ) { $_POST['schedule_posts_calendar']['theme'] = 1; }
 		if( !isset( $_POST['schedule_posts_calendar']['hide-timestamp'] ) ) { $_POST['schedule_posts_calendar']['hide-timestamp'] = 0; }
+		if( !isset( $_POST['schedule_posts_calendar']['popup-calendar'] ) ) { $_POST['schedule_posts_calendar']['popup-calendar'] = 0; }
 			
 		update_option( 'schedule_posts_calendar', $_POST['schedule_posts_calendar'] );
 		}
@@ -120,6 +121,10 @@ function schedule_posts_calendar_admin_page()
 			<div>&nbsp;</div>
 			
 			<div><input name="schedule_posts_calendar[hide-timestamp]" type="checkbox" value="1" <?php checked($options['hide-timestamp'], 1); ?> /> <?php _e("Hide WordPress's default time stamp display"); ?></div>
+
+			<div>&nbsp;</div>
+			
+			<div><input name="schedule_posts_calendar[popup-calendar]" type="checkbox" value="1" <?php checked($options['popup-calendar'], 1); ?> /> <?php _e("Use a popup calendar instead of an inline one (you probably want to hide the default dispaly above)"); ?></div>
 
 		</fieldset>
 			
