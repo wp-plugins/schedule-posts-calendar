@@ -39,6 +39,7 @@ If you are using IE in compatibility mode the calendar will overlap other areas,
 == Screenshots ==
 
 1. A screenshot of the publish panel with the schedule menu expanded showing the calendar.
+2. A screenshot of the publish panel with the schedule menu expanded with the default WordPress date/time fields hidden.
 
 == Changelog ==
 
