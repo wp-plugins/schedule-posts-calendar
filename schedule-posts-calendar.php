@@ -49,6 +49,13 @@ function schedule_posts_calendar()
 	wp_register_style( 'dhtmlxcalendar', $plugin_url . '/dhtmlxcalendar.css' );
     wp_enqueue_style( 'dhtmlxcalendar_style' );
     wp_enqueue_style( 'dhtmlxcalendar' );
+
+	// Add the css file that will hide the default WordPress timestamp field.
+	if( $options['hide-timestamp'] == 1 )
+		{
+		wp_register_style( 'hide-timestamp', $plugin_url . '/hide-timestamp.css' );
+		wp_enqueue_style( 'hide-timestamp' );
+		}
 	
 	// Register and enqueue the calender scripts.
 	wp_register_script( 'dhtmlxcalendar', $plugin_url . '/dhtmlxcalendar.js' );
@@ -67,6 +74,7 @@ function schedule_posts_calendar_admin_page()
 		{
 		if( !isset( $_POST['schedule_posts_calendar']['startofweek'] ) ) { $_POST['schedule_posts_calendar']['startofweek'] = 7; }
 		if( !isset( $_POST['schedule_posts_calendar']['theme'] ) ) { $_POST['schedule_posts_calendar']['theme'] = 1; }
+		if( !isset( $_POST['schedule_posts_calendar']['hide-timestamp'] ) ) { $_POST['schedule_posts_calendar']['hide-timestamp'] = 0; }
 			
 		update_option( 'schedule_posts_calendar', $_POST['schedule_posts_calendar'] );
 		}
@@ -81,7 +89,7 @@ function schedule_posts_calendar_admin_page()
 		<fieldset style="border:1px solid #cecece;padding:15px" >
 			<legend><h2>Schedule Posts Calendar Options</h2></legend>
 
-			<div>Start week on: <Select name="schedule_posts_calendar[startofweek]">
+			<div><?php _e('Start week on');?>: <Select name="schedule_posts_calendar[startofweek]">
 <?php
 			$daysoftheweek = array( "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" );
 			
@@ -96,7 +104,7 @@ function schedule_posts_calendar_admin_page()
 
 			<div>&nbsp;</div>
 			
-			<div>Calendar theme: <Select name="schedule_posts_calendar[theme]">
+			<div><?php _e('Calendar theme');?>: <Select name="schedule_posts_calendar[theme]">
 <?php
 			$themes = array( "Omega", "Sky Blue", "Web" );
 			
@@ -108,6 +116,10 @@ function schedule_posts_calendar_admin_page()
 				}
 ?>
 			</select></div>
+
+			<div>&nbsp;</div>
+			
+			<div><input name="schedule_posts_calendar[hide-timestamp]" type="checkbox" value="1" <?php checked($options['hide-timestamp'], 1); ?> /> <?php _e("Hide WordPress's default time stamp display"); ?></div>
 
 		</fieldset>
 			

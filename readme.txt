@@ -46,6 +46,7 @@ If you are using IE in compatibility mode the calendar will overlap other areas,
 * Created settings page
 * Added options to set the start of the week 
 * Added theme option
+* Added option to hide default WordPress date/time fields
 
 = 1.1 =
 * Minor update to reduce the size of the calendar div from 250px to 230px.
@@ -61,7 +62,6 @@ Minor update, see changelog for details.
 
 == Roadmap ==
 
-* Add option to hide the default WordPress date/time controls
 * Add option to replace the default WordPress controls with a single field and a popup calendar
 * Add support for the quick edit area in the post/pages lists
 

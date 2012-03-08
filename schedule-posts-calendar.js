@@ -1,13 +1,13 @@
 function GetScriptIndex(name)
 {
-	// Loop through all the scripts in the current document to find the one we want
+	// Loop through all the scripts in the current document to find the one we want.
 	for( i = 0; i < document.scripts.length; i++) 
 		{
-		// Make a temporary copy of the URI and find out where the query string starts
+		// Make a temporary copy of the URI and find out where the query string starts.
 		var tmp_src = String(document.scripts[i].src);
 		var qs_index = tmp_src.indexOf('?');
 
-		// Check if the script is the script we are looking for and if it has a QS, if so return the current index
+		// Check if the script is the script we are looking for and if it has a QS, if so return the current index.
 		if( tmp_src.indexOf(name) >= 0 && qs_index >= 0)
 			{
 			return i;
@@ -27,23 +27,23 @@ function GetScriptVariable(index, name, vardef)
 		return vardef;
 		}
 
-	// Make a temporary copy of the URI and find out where the query string starts
+	// Make a temporary copy of the URI and find out where the query string starts.
 	var tmp_src = String(document.scripts[index].src);
 	var qs_index = tmp_src.indexOf('?');
 
 	// Split the query string ino var/value pairs.  ie: 'var1=value1', 'var2=value2', ...
 	var params_raw = tmp_src.substr(qs_index + 1).split('&');
 
-	// Now look for the one we want...
+	// Now look for the one we want.
 	for( j = 0; j < params_raw.length; j++)
 		{
-		// Split names from the values
+		// Split names from the values.
 		var pp_raw = params_raw[j].split('=');
 
 		// If this is the one we're looking for, simply return it.
 		if( pp_raw[0] == name )
 			{
-			// Check to make sure a value was actualy passed in, otherwise we should return the default later on
+			// Check to make sure a value was actualy passed in, otherwise we should return the default later on.
 			if( typeof(pp_raw[1]) != 'undefined' )
 				{
 				return pp_raw[1];
@@ -51,7 +51,7 @@ function GetScriptVariable(index, name, vardef)
 			}
 		}
 
-	// If we fell through the loop and didn't find ANY matching variable, simply return the default value
+	// If we fell through the loop and didn't find ANY matching variable, simply return the default value.
 	return vardef;
 }
 
@@ -107,5 +107,5 @@ function AddCalendar()
 	}
 }
 
-// Use an event listerner to add the calendar on a page load instead of .OnLoad as we might otherwise get overwritten by another plugin
+// Use an event listerner to add the calendar on a page load instead of .OnLoad as we might otherwise get overwritten by another plugin.
 window.addEventListener ? window.addEventListener("load",AddCalendar,false) : window.attachEvent && window.attachEvent("onload",AddCalendar);
