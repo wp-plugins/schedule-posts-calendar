@@ -90,7 +90,7 @@ function AddCalendar()
 
 		// Get the current date/time from the form.
 		var sDay = new String(document.getElementById('jj').value);
-		var sMon = new String(document.getElementById('mm').selectedIndex + 1);
+		var sMon = new String(document.getElementById('mm').selectedIndex);
 		var sYear = new String(document.getElementById('aa').value);
 		var sHour = new String(document.getElementById('hh').value);
 		var sMin = new String(document.getElementById('mn').value);
@@ -106,6 +106,9 @@ function AddCalendar()
 		// If we're replacing the stock WP fields, set the new field's starting date.  Make sure the formating looks right with 0 padded day/mon/hour/minute fields.
 		if( popupCalendar == 1 )
 			{
+			// The index returned is 0 based but we need it to be 1 based to create the string.
+			sMon = new String(document.getElementById('mm').selectedIndex + 1);
+			
 			var dateString = '';
 			if( sDay.length < 2 ) { dateString += '0'; }
 			dateString += sDay + '/';

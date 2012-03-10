@@ -5,7 +5,7 @@ Author URI: http://toolstack.com
 Tags: admin posts calendar
 Requires at least: 3.0.0
 Tested up to: 3.3.1
-Stable tag: 2.0
+Stable tag: 2.1
 
 Adds a JavaScript calendar to the scheduled publish widget to allow you to select a date and time graphically instead of via the text entry boxes.
 
@@ -46,6 +46,9 @@ If you are using IE in compatibility mode the calendar will overlap other areas,
 
 == Changelog ==
 
+= 2.1 =
+* Minor bug fix that caused the inline calendar to start on month in the future
+
 = 2.0 = 
 * Created settings page
 * Added options to set the start of the week 
@@ -61,6 +64,9 @@ If you are using IE in compatibility mode the calendar will overlap other areas,
 * Initial release.
 
 == Upgrade Notice ==
+
+= 2.1 =
+Minor bug update, see changelog for details.
 
 = 2.0 =
 Major update, including preferences and pop-up calendar support.  See changlog for details.
