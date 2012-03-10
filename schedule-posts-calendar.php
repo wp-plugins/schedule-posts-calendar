@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Schedule Posts Calendar
-Version: 2.0
+Version: 2.1
 Plugin URI: http://toolstack.com/SchedulePostsCalendar
 Author: Greg Ross
 Author URI: http://toolstack.com
