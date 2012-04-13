@@ -78,6 +78,8 @@ function schedule_posts_calendar_admin_page()
 		if( !isset( $_POST['schedule_posts_calendar']['popup-calendar'] ) ) { $_POST['schedule_posts_calendar']['popup-calendar'] = 0; }
 			
 		update_option( 'schedule_posts_calendar', $_POST['schedule_posts_calendar'] );
+		
+		print "<div id='setting-error-settings_updated' class='updated settings-error'><p><strong>Settings saved.</strong></p></div>\n";
 		}
 
 		$options = get_option( 'schedule_posts_calendar' );
@@ -87,8 +89,8 @@ function schedule_posts_calendar_admin_page()
 <div class="wrap">
 	<form method="post">
 	
-		<fieldset style="border:1px solid #cecece;padding:15px" >
-			<legend><h2>Schedule Posts Calendar Options</h2></legend>
+		<fieldset style="border:1px solid #cecece;padding:15px; margin-top:25px" >
+			<legend><span style="font-size: 24px; font-weight: 700;">Schedule Posts Calendar Options</span></legend>
 
 			<div><?php _e('Start week on');?>: <Select name="schedule_posts_calendar[startofweek]">
 <?php
