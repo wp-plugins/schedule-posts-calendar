@@ -228,6 +228,13 @@ function schedule_posts_calendar_link_row($actions, $post)
 	return $actions;
 	}
 
+function schedule_posts_calendar_plugin_actions( $actions, $plugin_file, $plugin_data, $context ) 
+	{
+	array_unshift( $actions, '<a href="' . admin_url() . 'options-general.php?page=schedule-posts-calendar.php">Settings</a>' );
+	
+	return $actions;
+	}
+	
 // Time to register the .css and .js pages, if we need to of course ;)
 $fname = SCP_Add_Calendar_Includes();
 if( $fname <> "" ) { add_action( 'admin_init', $fname ); }
@@ -238,7 +245,11 @@ if( $fname == "schedule_posts_calendar_quick_schedule" )
 }
 
 // Now add the admin menu items
-if ( is_admin() ) { add_action( 'admin_menu', 'schedule_posts_calendar_admin', 1 ); }
+if ( is_admin() ) 
+	{ 
+	add_action( 'admin_menu', 'schedule_posts_calendar_admin', 1 ); 
+	add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'schedule_posts_calendar_plugin_actions', 10, 4);
+	}
 
 
 ?>
