@@ -65,6 +65,47 @@ function schedule_posts_calendar()
 	}
 
 /*
+ *	This function is called to add the .css and .js files to the wordpress list pages.
+ *	It's registered at the end of the file with an add_action() call.
+ */
+function schedule_posts_calendar_quick_schedule() 
+	{
+	// Find out where our plugin is stored.
+	$plugin_url = plugins_url( '', __FILE__ );
+	
+	// Retreive the options.
+	$options = get_option( 'schedule_posts_calendar' );
+
+	// Register and enqueue the calendar css files, create a theme string to use later during the javascript inclusion.
+	switch( $options['theme'] )
+		{
+		case 3:
+			wp_register_style( 'dhtmlxcalendar_style', $plugin_url . '/skins/dhtmlxcalendar_dhx_web.css' );
+			$theme = 'dhx_web';
+			break;
+		case 2:
+			wp_register_style( 'dhtmlxcalendar_style', $plugin_url . '/skins/dhtmlxcalendar_dhx_skyblue.css' );
+			$theme = 'dhx_skyblue';
+			break;
+		default:
+			wp_register_style( 'dhtmlxcalendar_style', $plugin_url . '/skins/dhtmlxcalendar_omega.css' );
+			$theme = 'omega';
+			break;
+		}
+
+	wp_register_style( 'dhtmlxcalendar_style', $plugin_url . '/skins/dhtmlxcalendar_omega.css' );
+	wp_register_style( 'dhtmlxcalendar', $plugin_url . '/dhtmlxcalendar.css' );
+    wp_enqueue_style( 'dhtmlxcalendar_style' );
+    wp_enqueue_style( 'dhtmlxcalendar' );
+
+	// Register and enqueue the calender scripts.
+	wp_register_script( 'dhtmlxcalendar', $plugin_url . '/dhtmlxcalendar.js' );
+	wp_register_script( 'schedulepostscalendar', $plugin_url . '/schedule-posts-calendar-quick-schedule.js?theme=' . $theme . '&startofweek=' . $options['startofweek'] . '&popupcalendar=' . $options['popup-calendar'], "dhtmlxcalendar" );
+	wp_enqueue_script( 'dhtmlxcalendar' );
+	wp_enqueue_script( 'schedulepostscalendar' );
+	}
+
+/*
  *	This function is called when you select the admin page for the plugin, it generates the HTML
  *	and is responsible to store the settings.
  */
@@ -159,9 +200,11 @@ function SCP_Add_Calendar_Includes()
 			{
 			case "post":
 			case "post-new":
-				return true;
+				return "schedule_posts_calendar";
+			case "edit":
+				return "schedule_posts_calendar_quick_schedule";
 			default:
-				return false;
+				return "";
 			}
 		}
 	else
@@ -175,9 +218,27 @@ function schedule_posts_calendar_admin()
 	add_options_page( 'Schedule Posts Calendar', 'Schedule Posts Calendar', 9, basename( __FILE__ ), 'schedule_posts_calendar_admin_page');
 	}	
 
+/**
+ * Add the link to action list for post_row_actions
+ */
+function schedule_posts_calendar_link_row($actions, $post) 
+	{
+	$actions['schedule'] = '<a href="#" class="editinlineschedule" title="Schedule this item" onClick="schedule_posts_calendar_quick_schedule_edit(' . $post->ID . ');">Schedule</a>';
+		
+	return $actions;
+	}
+
 // Time to register the .css and .js pages, if we need to of course ;)
-if( SCP_Add_Calendar_Includes() ) { add_action( 'admin_init', 'schedule_posts_calendar' ); }
+$fname = SCP_Add_Calendar_Includes();
+if( $fname <> "" ) { add_action( 'admin_init', $fname ); }
+if( $fname == "schedule_posts_calendar_quick_schedule" )
+{
+	add_filter('post_row_actions', 'schedule_posts_calendar_link_row',10,2);
+	add_filter('page_row_actions', 'schedule_posts_calendar_link_row',10,2);
+}
 
 // Now add the admin menu items
 if ( is_admin() ) { add_action( 'admin_menu', 'schedule_posts_calendar_admin', 1 ); }
+
+
 ?>
