@@ -213,13 +213,17 @@ function SCP_Add_Calendar_Includes()
 		}
 	}
 
+/*
+ *	This function is called to add the options page to the settings menu.
+ *	It's registered at the end of the file with an add_action() call.
+ */	
 function schedule_posts_calendar_admin()
 	{
 	add_options_page( 'Schedule Posts Calendar', 'Schedule Posts Calendar', 9, basename( __FILE__ ), 'schedule_posts_calendar_admin_page');
 	}	
 
 /**
- * Add the link to action list for post_row_actions
+ * Add the link to action list for post_row_actions.
  */
 function schedule_posts_calendar_link_row($actions, $post) 
 	{
@@ -228,6 +232,9 @@ function schedule_posts_calendar_link_row($actions, $post)
 	return $actions;
 	}
 
+/**
+ * Add the link to settings from the plugin list.
+ */
 function schedule_posts_calendar_plugin_actions( $actions, $plugin_file, $plugin_data, $context ) 
 	{
 	array_unshift( $actions, '<a href="' . admin_url() . 'options-general.php?page=schedule-posts-calendar.php">Settings</a>' );
@@ -236,8 +243,14 @@ function schedule_posts_calendar_plugin_actions( $actions, $plugin_file, $plugin
 	}
 	
 // Time to register the .css and .js pages, if we need to of course ;)
+
+// First find out if we're in a post/page list, in a post/page edit page or somewhere we don't care about.
 $fname = SCP_Add_Calendar_Includes();
+
+// If we're somewhere we care about, do the admin_init action.
 if( $fname <> "" ) { add_action( 'admin_init', $fname ); }
+
+// If we're in the post/page list, add the quick schedule menu itmes.
 if( $fname == "schedule_posts_calendar_quick_schedule" )
 {
 	add_filter('post_row_actions', 'schedule_posts_calendar_link_row',10,2);

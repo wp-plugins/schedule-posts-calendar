@@ -12,7 +12,6 @@ function GetScriptIndex(name)
 			{
 			return i;
 			}
-		
 		}
 		
 	return -1;
