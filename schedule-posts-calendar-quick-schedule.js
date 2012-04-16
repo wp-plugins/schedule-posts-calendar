@@ -196,7 +196,7 @@ function schedule_posts_calendar_quick_schedule_cancel(id)
 	// Loop through all the rows in the table until we find the one we added.
 	for(i=0; i<table.rows.length; i++ )
 		{
-		if( table.rows[i].id == "editinlineschedule" )
+		if( table.rows[i].id == "editinlineschedule-" + id )
 			{
 			// Delete the row we added
 			table.deleteRow(i);
@@ -217,7 +217,7 @@ function schedule_posts_calendar_quick_schedule_edit(id)
 	var new_cell = new_row.insertCell(0);
 	
 	// Assign an id to the new row.
-	new_row.id = "editinlineschedule";
+	new_row.id = "editinlineschedule-" + id;
 	
 	// Assgin the classes to the new row.
 	new_row.className = "inline-edit-row inline-edit-row-post inline-edit-post quick-edit-row quick-edit-row-post inline-edit-post";
