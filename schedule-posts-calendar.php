@@ -161,11 +161,20 @@ function schedule_posts_calendar_admin_page()
 			
 			<div><input name="schedule_posts_calendar[popup-calendar]" type="checkbox" value="1" <?php checked($options['popup-calendar'], 1); ?> /> <?php _e("Use a popup calendar instead of an inline one (you probably want to hide the default dispaly above)"); ?></div>
 
-		</fieldset>
+			<div class="submit"><input type="submit" name="info_update" value="<?php _e('Update Options') ?> &raquo;" /></div>
 			
-		<div class="submit"><input type="submit" name="info_update" value="<?php _e('Update Options') ?> &raquo;" /></div>
+		</fieldset>
 		
 	</form>
+	
+	<fieldset style="border:1px solid #cecece;padding:15px; margin-top:25px" >
+			<legend><span style="font-size: 24px; font-weight: 700;">About</span></legend>
+			<p>Schedule Posts Calendar Version 2.1</p>
+			<p>by Greg Ross</p>
+			<p>&nbsp;</p>
+			<p>Licenced under the <a href="http://www.gnu.org/licenses/gpl-2.0.html" target=_blank>GPL Version 2</a></p>
+			<p>Visit the plug-in site at <a href="http://ToolStack.com/SchedulePostsCalendar" target=_blank>ToolStack.com</a>!</p>
+	</fieldset>
 </div>
 	<?php
 	//***** End HTML
