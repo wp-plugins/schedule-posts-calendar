@@ -43,11 +43,16 @@ If you are using IE in compatibility mode the calendar will overlap other areas,
 3. The publish panel with the default WP fields hidden and a popup calendar field.
 4. The publish panel with the default WP fields hidden and a popup calendar visable.
 5. The control panel options.
+6. The schedule menu item in the posts/pages list.
+7. The schedule mode in the posts/pages list.
 
 == Changelog ==
 
+= 3.0 =
+* Major update to include support for a schedule calendar in the posts/pages list.
+
 = 2.1 =
-* Minor bug fix that caused the inline calendar to start on month in the future
+* Minor bug fix that caused the inline calendar to start one month in the future
 
 = 2.0 = 
 * Created settings page
@@ -64,6 +69,8 @@ If you are using IE in compatibility mode the calendar will overlap other areas,
 * Initial release.
 
 == Upgrade Notice ==
+= 3.0 = 
+Major update to include new functionality on the posts/pages list in WordPress.
 
 = 2.1 =
 Minor bug update, see changelog for details.

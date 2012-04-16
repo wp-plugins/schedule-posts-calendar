@@ -17,6 +17,40 @@ This software is released under the GPL v2.0, see license.txt for details
 */
 
 /*
+ *	This function is called to add the .css and .js files for the calendar to 
+ *  the wordpress pages.
+ *	It's registered at the end of the file with an add_action() call.
+ */
+function schedule_posts_calendar_add_cal($theme_num, $url) 
+	{
+	// Register and enqueue the calendar css files, create a theme string to use later during the javascript inclusion.
+	switch( $theme_num )
+		{
+		case 3:
+			wp_register_style( 'dhtmlxcalendar_style', $url . '/skins/dhtmlxcalendar_dhx_web.css' );
+			$theme = 'dhx_web';
+			break;
+		case 2:
+			wp_register_style( 'dhtmlxcalendar_style', $url . '/skins/dhtmlxcalendar_dhx_skyblue.css' );
+			$theme = 'dhx_skyblue';
+			break;
+		default:
+			wp_register_style( 'dhtmlxcalendar_style', $url . '/skins/dhtmlxcalendar_omega.css' );
+			$theme = 'omega';
+			break;
+		}
+
+	wp_register_style( 'dhtmlxcalendar_style', $url . '/skins/dhtmlxcalendar_omega.css' );
+	wp_register_style( 'dhtmlxcalendar', $url . '/dhtmlxcalendar.css' );
+    wp_enqueue_style( 'dhtmlxcalendar_style' );
+    wp_enqueue_style( 'dhtmlxcalendar' );
+
+	// Register and enqueue the calender scripts.
+	wp_register_script( 'dhtmlxcalendar', $url . '/dhtmlxcalendar.js' );
+	wp_enqueue_script( 'dhtmlxcalendar' );
+	}
+
+/*
  *	This function is called to add the .css and .js files to the wordpress pages.
  *	It's registered at the end of the file with an add_action() call.
  */
@@ -29,27 +63,8 @@ function schedule_posts_calendar()
 	$options = get_option( 'schedule_posts_calendar' );
 	
 	// Register and enqueue the calendar css files, create a theme string to use later during the javascript inclusion.
-	switch( $options['theme'] )
-		{
-		case 3:
-			wp_register_style( 'dhtmlxcalendar_style', $plugin_url . '/skins/dhtmlxcalendar_dhx_web.css' );
-			$theme = 'dhx_web';
-			break;
-		case 2:
-			wp_register_style( 'dhtmlxcalendar_style', $plugin_url . '/skins/dhtmlxcalendar_dhx_skyblue.css' );
-			$theme = 'dhx_skyblue';
-			break;
-		default:
-			wp_register_style( 'dhtmlxcalendar_style', $plugin_url . '/skins/dhtmlxcalendar_omega.css' );
-			$theme = 'omega';
-			break;
-		}
-
-	wp_register_style( 'dhtmlxcalendar_style', $plugin_url . '/skins/dhtmlxcalendar_omega.css' );
-	wp_register_style( 'dhtmlxcalendar', $plugin_url . '/dhtmlxcalendar.css' );
-    wp_enqueue_style( 'dhtmlxcalendar_style' );
-    wp_enqueue_style( 'dhtmlxcalendar' );
-
+	schedule_posts_calendar_add_cal( $options['theme'], $plugin_url );
+	
 	// Add the css file that will hide the default WordPress timestamp field.
 	if( $options['hide-timestamp'] == 1 )
 		{
@@ -58,9 +73,7 @@ function schedule_posts_calendar()
 		}
 	
 	// Register and enqueue the calender scripts.
-	wp_register_script( 'dhtmlxcalendar', $plugin_url . '/dhtmlxcalendar.js' );
 	wp_register_script( 'schedulepostscalendar', $plugin_url . '/schedule-posts-calendar.js?theme=' . $theme . '&startofweek=' . $options['startofweek'] . '&popupcalendar=' . $options['popup-calendar'], "dhtmlxcalendar" );
-	wp_enqueue_script( 'dhtmlxcalendar' );
 	wp_enqueue_script( 'schedulepostscalendar' );
 	}
 
@@ -77,31 +90,10 @@ function schedule_posts_calendar_quick_schedule()
 	$options = get_option( 'schedule_posts_calendar' );
 
 	// Register and enqueue the calendar css files, create a theme string to use later during the javascript inclusion.
-	switch( $options['theme'] )
-		{
-		case 3:
-			wp_register_style( 'dhtmlxcalendar_style', $plugin_url . '/skins/dhtmlxcalendar_dhx_web.css' );
-			$theme = 'dhx_web';
-			break;
-		case 2:
-			wp_register_style( 'dhtmlxcalendar_style', $plugin_url . '/skins/dhtmlxcalendar_dhx_skyblue.css' );
-			$theme = 'dhx_skyblue';
-			break;
-		default:
-			wp_register_style( 'dhtmlxcalendar_style', $plugin_url . '/skins/dhtmlxcalendar_omega.css' );
-			$theme = 'omega';
-			break;
-		}
-
-	wp_register_style( 'dhtmlxcalendar_style', $plugin_url . '/skins/dhtmlxcalendar_omega.css' );
-	wp_register_style( 'dhtmlxcalendar', $plugin_url . '/dhtmlxcalendar.css' );
-    wp_enqueue_style( 'dhtmlxcalendar_style' );
-    wp_enqueue_style( 'dhtmlxcalendar' );
+	schedule_posts_calendar_add_cal( $options['theme'], $plugin_url );
 
 	// Register and enqueue the calender scripts.
-	wp_register_script( 'dhtmlxcalendar', $plugin_url . '/dhtmlxcalendar.js' );
 	wp_register_script( 'schedulepostscalendar', $plugin_url . '/schedule-posts-calendar-quick-schedule.js?theme=' . $theme . '&startofweek=' . $options['startofweek'] . '&popupcalendar=' . $options['popup-calendar'], "dhtmlxcalendar" );
-	wp_enqueue_script( 'dhtmlxcalendar' );
 	wp_enqueue_script( 'schedulepostscalendar' );
 	}
 
