@@ -120,11 +120,10 @@ function schedule_posts_calendar_admin_page()
 	//***** Start HTML
 	?>
 <div class="wrap">
-	<form method="post">
 	
-		<fieldset style="border:1px solid #cecece;padding:15px; margin-top:25px" >
-			<legend><span style="font-size: 24px; font-weight: 700;">Schedule Posts Calendar Options</span></legend>
-
+	<fieldset style="border:1px solid #cecece;padding:15px; margin-top:25px" >
+		<legend><span style="font-size: 24px; font-weight: 700;">Schedule Posts Calendar Options</span></legend>
+		<form method="post">
 			<div><?php _e('Start week on');?>: <Select name="schedule_posts_calendar[startofweek]">
 <?php
 			$daysoftheweek = array( "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" );
@@ -163,10 +162,10 @@ function schedule_posts_calendar_admin_page()
 
 			<div class="submit"><input type="submit" name="info_update" value="<?php _e('Update Options') ?> &raquo;" /></div>
 			
-		</fieldset>
-		
-	</form>
+		</form>
 	
+	</fieldset>
+		
 	<fieldset style="border:1px solid #cecece;padding:15px; margin-top:25px" >
 			<legend><span style="font-size: 24px; font-weight: 700;">About</span></legend>
 			<p>Schedule Posts Calendar Version 2.1</p>
