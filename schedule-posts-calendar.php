@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Schedule Posts Calendar
-Version: 2.1
+Version: 3.0
 Plugin URI: http://toolstack.com/SchedulePostsCalendar
 Author: Greg Ross
 Author URI: http://toolstack.com
@@ -168,7 +168,7 @@ function schedule_posts_calendar_admin_page()
 		
 	<fieldset style="border:1px solid #cecece;padding:15px; margin-top:25px" >
 			<legend><span style="font-size: 24px; font-weight: 700;">About</span></legend>
-			<p>Schedule Posts Calendar Version 2.1</p>
+			<p>Schedule Posts Calendar Version 3.0</p>
 			<p>by Greg Ross</p>
 			<p>&nbsp;</p>
 			<p>Licenced under the <a href="http://www.gnu.org/licenses/gpl-2.0.html" target=_blank>GPL Version 2</a></p>
