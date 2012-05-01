@@ -160,7 +160,7 @@ function schedule_posts_calendar_quick_schedule_update(id)
 
 	// build the rest of the params, inlcuding the date/time (mm, aa, jj, mn, hh), the inline 
 	// edit value and the post id.
-	fields = "mm=" + new_date_parts[1].trim() + "&aa=" + new_date_parts[2].trim() + "&jj=" + new_date_parts[0].trim() + "&mn=" + new_time_parts[1].trim() + "&hh=" + new_time_parts[1].trim() + "&_inline_edit=" + document.getElementById('_inline_edit').value + "&post_ID=" + id;
+	fields = "mm=" + new_date_parts[1].trim() + "&aa=" + new_date_parts[2].trim() + "&jj=" + new_date_parts[0].trim() + "&mn=" + new_time_parts[1].trim() + "&hh=" + new_time_parts[0].trim() + "&_inline_edit=" + document.getElementById('_inline_edit').value + "&post_ID=" + id;
 		
 	// Combine the seed params and the fields param.	
 	params = fields + '&' + $jq.param(seed_params);

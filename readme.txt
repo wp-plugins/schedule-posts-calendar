@@ -5,7 +5,7 @@ Author URI: http://toolstack.com
 Tags: admin posts calendar
 Requires at least: 3.0.0
 Tested up to: 3.3.1
-Stable tag: 3.0
+Stable tag: 3.1
 
 Adds a JavaScript calendar to the scheduled publish widget to allow you to select a date and time graphically instead of via the text entry boxes.
 
@@ -29,8 +29,8 @@ This code is released under the GPL v2, see license.txt for details.
 Try it and find out, the javascript to insert the calendar is pretty standard and has been tested on:
 
 	* IE9 (note, do NOT use compatibility mode)
-	* Opera 11.6
-	* FireFox 10
+	* Opera 11.6+
+	* FireFox 10+
 
 = Why is the calendar overlapping the other areas? =
 
@@ -47,6 +47,8 @@ If you are using IE in compatibility mode the calendar will overlap other areas,
 7. The schedule mode in the posts/pages list.
 
 == Changelog ==
+= 3.1 =
+* Minor bug fix, when using the new quick edit mode in the posts/pages changing the date/time would incorrectly set the hour to be the same as the minute.
 
 = 3.0 =
 * Major update to include support for a schedule calendar in the posts/pages list.
@@ -69,6 +71,9 @@ If you are using IE in compatibility mode the calendar will overlap other areas,
 * Initial release.
 
 == Upgrade Notice ==
+= 3.1 =
+Minor bug update, see changelog for details.
+
 = 3.0 = 
 Major update to include new functionality on the posts/pages list in WordPress.
 
