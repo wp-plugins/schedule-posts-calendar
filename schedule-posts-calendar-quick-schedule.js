@@ -173,7 +173,16 @@ function schedule_posts_calendar_quick_schedule_update(id)
 
 			if (r) {
 				if ( -1 != r.indexOf('<tr') ) {
-					// If we succeeded, close the schedule edit row and show the item again.
+					// If we succeeded, update the date column, close the schedule edit row and show the item again.
+					var edit_row = document.getElementById('post-' + id);
+					for(i=0; i<edit_row.children.length; i++ )
+						{
+						if(edit_row.children[i].className=="date column-date")
+							{
+							edit_row.children[i].children[0].innerHTML=new_date_parts[2].trim() + "/" + new_date_parts[1].trim() + "/" + new_date_parts[0].trim();
+							}
+						}
+
 					schedule_posts_calendar_quick_schedule_cancel(id);
 				}
 			}
