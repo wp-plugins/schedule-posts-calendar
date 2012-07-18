@@ -4,8 +4,8 @@ Plugin URI: http://toolstack.com/schedulepostscalendar
 Author URI: http://toolstack.com
 Tags: admin posts calendar
 Requires at least: 3.0.0
-Tested up to: 3.3.1
-Stable tag: 3.1
+Tested up to: 3.4.1
+Stable tag: 3.2
 
 Adds a JavaScript calendar to the scheduled publish widget to allow you to select a date and time graphically instead of via the text entry boxes.
 
@@ -47,6 +47,10 @@ If you are using IE in compatibility mode the calendar will overlap other areas,
 7. The schedule mode in the posts/pages list.
 
 == Changelog ==
+= 3.2 =
+* Minor update, in pervious versions if you use the quick edit mode and make a change to the scheduled date it would not update the scheduled date in the list. 
+* Test up to WordPress 3.4.1
+
 = 3.1 =
 * Minor bug fix, when using the new quick edit mode in the posts/pages changing the date/time would incorrectly set the hour to be the same as the minute.
 
@@ -71,6 +75,9 @@ If you are using IE in compatibility mode the calendar will overlap other areas,
 * Initial release.
 
 == Upgrade Notice ==
+= 3.2 =
+Minor feature addition, see changelog for details.
+
 = 3.1 =
 Minor bug update, see changelog for details.
 
