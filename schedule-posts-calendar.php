@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Schedule Posts Calendar
-Version: 3.2
+Version: 3.3
 Plugin URI: http://toolstack.com/SchedulePostsCalendar
 Author: Greg Ross
 Author URI: http://toolstack.com
@@ -11,7 +11,7 @@ Compatible with WordPress 3+.
 
 Read the accompanying readme.txt file for instructions and documentation.
 
-Copyright (c) 2012 by Greg Ross
+Copyright (c) 2012-13 by Greg Ross
 
 This software is released under the GPL v2.0, see license.txt for details
 */
@@ -73,7 +73,7 @@ function schedule_posts_calendar()
 		}
 	
 	// Register and enqueue the calender scripts.
-	wp_register_script( 'schedulepostscalendar', $plugin_url . '/schedule-posts-calendar.js?theme=' . $theme . '&startofweek=' . $options['startofweek'] . '&popupcalendar=' . $options['popup-calendar'], "dhtmlxcalendar" );
+	wp_register_script( 'schedulepostscalendar', $plugin_url . '/schedule-posts-calendar.js?theme=' . $options['theme'] . '&startofweek=' . $options['startofweek'] . '&popupcalendar=' . $options['popup-calendar'], "dhtmlxcalendar" );
 	wp_enqueue_script( 'schedulepostscalendar' );
 	}
 
@@ -93,7 +93,7 @@ function schedule_posts_calendar_quick_schedule()
 	schedule_posts_calendar_add_cal( $options['theme'], $plugin_url );
 
 	// Register and enqueue the calender scripts.
-	wp_register_script( 'schedulepostscalendar', $plugin_url . '/schedule-posts-calendar-quick-schedule.js?theme=' . $theme . '&startofweek=' . $options['startofweek'] . '&popupcalendar=' . $options['popup-calendar'], "dhtmlxcalendar" );
+	wp_register_script( 'schedulepostscalendar', $plugin_url . '/schedule-posts-calendar-quick-schedule.js?theme=' . $options['theme'] . '&startofweek=' . $options['startofweek'] . '&popupcalendar=' . $options['popup-calendar'], "dhtmlxcalendar" );
 	wp_enqueue_script( 'schedulepostscalendar' );
 	}
 
@@ -219,7 +219,7 @@ function SCP_Add_Calendar_Includes()
  */	
 function schedule_posts_calendar_admin()
 	{
-	add_options_page( 'Schedule Posts Calendar', 'Schedule Posts Calendar', 9, basename( __FILE__ ), 'schedule_posts_calendar_admin_page');
+	add_options_page( 'Schedule Posts Calendar', 'Schedule Posts Calendar', 'manage_options', basename( __FILE__ ), 'schedule_posts_calendar_admin_page');
 	}	
 
 /**

@@ -4,8 +4,8 @@ Plugin URI: http://toolstack.com/schedulepostscalendar
 Author URI: http://toolstack.com
 Tags: admin posts calendar
 Requires at least: 3.0.0
-Tested up to: 3.7
-Stable tag: 3.2
+Tested up to: 3.7.1
+Stable tag: 3.3
 
 Adds a JavaScript calendar to the scheduled publish widget to allow you to select a date and time graphically instead of via the text entry boxes.
 
@@ -47,9 +47,13 @@ If you are using IE in compatibility mode the calendar will overlap other areas,
 7. The schedule mode in the posts/pages list.
 
 == Changelog ==
+= 3.3 =
+* Bug fix on the theme selection code, thanks JochenT.
+* Code update to resolve depricated use of role/responsibilities when adding the admin page, thanks JochenT.
+
 = 3.2 =
 * Minor update, in pervious versions if you use the quick edit mode and make a change to the scheduled date it would not update the scheduled date in the list. 
-* Test up to WordPress 3.4.1
+* Test up to WordPress 3.4.1.
 
 = 3.1 =
 * Minor bug fix, when using the new quick edit mode in the posts/pages changing the date/time would incorrectly set the hour to be the same as the minute.
@@ -58,14 +62,14 @@ If you are using IE in compatibility mode the calendar will overlap other areas,
 * Major update to include support for a schedule calendar in the posts/pages list.
 
 = 2.1 =
-* Minor bug fix that caused the inline calendar to start one month in the future
+* Minor bug fix that caused the inline calendar to start one month in the future.
 
 = 2.0 = 
-* Created settings page
-* Added options to set the start of the week 
-* Added theme option
-* Added option to hide default WordPress date/time fields
-* Added popup option to the calendar instead of the default inline
+* Created settings page.
+* Added options to set the start of the week.
+* Added theme option.
+* Added option to hide default WordPress date/time fields.
+* Added popup option to the calendar instead of the default inline.
 
 = 1.1 =
 * Minor update to reduce the size of the calendar div from 250px to 230px.
@@ -75,25 +79,9 @@ If you are using IE in compatibility mode the calendar will overlap other areas,
 * Initial release.
 
 == Upgrade Notice ==
-= 3.2 =
-Minor feature addition, see changelog for details.
-
-= 3.1 =
-Minor bug update, see changelog for details.
-
-= 3.0 = 
-Major update to include new functionality on the posts/pages list in WordPress.
-
-= 2.1 =
-Minor bug update, see changelog for details.
-
-= 2.0 =
-Major update, including preferences and pop-up calendar support.  See changlog for details.
-
-= 1.1 =
-Minor update, see changelog for details.
+= 3.3 =
+None.
 
 == Roadmap ==
-
-* Add support for the quick edit area in the post/pages lists
+* None at this time.
 

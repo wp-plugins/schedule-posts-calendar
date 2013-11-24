@@ -65,9 +65,23 @@ function AddCalendar()
 		// Retrive the script options from the URI
 		var GSI = GetScriptIndex('schedule-posts-calendar.js');
 		var startOfWeek = GetScriptVariable(GSI, 'startofweek', 7);
-		var theme = GetScriptVariable(GSI, 'theme', 'omega');
+		var themenumber = GetScriptVariable(GSI, 'theme', '1');
 		var popupCalendar = GetScriptVariable(GSI, 'popupcalendar', 0);
-
+		var theme = '';
+		
+		if( themenumber == '3' )
+			{
+			theme = 'dhx_web';
+			}
+		else if( themenumber == '2' )
+			{
+			theme = 'dhx_skyblue';
+			}
+		else
+			{
+			theme = 'omega';
+			}
+		
 		// Create a new div element and setup it's style and id to be inserted.
 		if( popupCalendar == 0 )
 			{
