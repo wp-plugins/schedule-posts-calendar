@@ -65,8 +65,22 @@ function AddCalendar(sDay, sMon, sYear, sHour, sMin, id)
 		// Retrive the script options from the URI
 		var GSI = GetScriptIndex('schedule-posts-calendar-quick-schedule.js');
 		var startOfWeek = GetScriptVariable(GSI, 'startofweek', 7);
-		var theme = GetScriptVariable(GSI, 'theme', 'omega');
+		var themenumber = GetScriptVariable(GSI, 'theme', 'omega');
 		var popupCalendar = GetScriptVariable(GSI, 'popupcalendar', 0);
+		var theme = '';
+
+		if( themenumber == '3' )
+			{
+			theme = 'dhx_web';
+			}
+		else if( themenumber == '2' )
+			{
+			theme = 'dhx_skyblue';
+			}
+		else
+			{
+			theme = 'omega';
+			}
 
 		// Setup a date object to use to set the inital calendar date to display from the values in the WordPress controls.
 		var startingDate = new Date();
