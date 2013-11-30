@@ -1,3 +1,8 @@
+/*
+	This function returns the index of specific JavaScript file we're looking for.
+	
+	name = the file name of the script to look for
+*/
 function GetScriptIndex(name)
 {
 	// Loop through all the scripts in the current document to find the one we want.
@@ -17,6 +22,9 @@ function GetScriptIndex(name)
 	return -1;
 }
 
+/*
+	This function retuns the value of a variable passed on the URI of a JavaScript file.
+*/
 function GetScriptVariable(index, name, vardef)
 {
 	// If a negitive index has been passed in it's because we didn't find any matching script with a query
@@ -54,6 +62,9 @@ function GetScriptVariable(index, name, vardef)
 	return vardef;
 }
 
+/*
+	This function adds the JavaScript calendar to the html elements in the quick edit area.
+*/
 function AddCalendar(sDay, sMon, sYear, sHour, sMin, id)
 {
 	// Find the timesteampdiv <div> in the current page.
@@ -110,6 +121,9 @@ function AddCalendar(sDay, sMon, sYear, sHour, sMin, id)
 	}
 }
 
+/*
+	This function creates a zero padded date string.
+*/
 function eis_format_date(sDay, sMon, sYear, sHour, sMin)
 	{
 	// Format a date to match the calendar format
@@ -126,6 +140,11 @@ function eis_format_date(sDay, sMon, sYear, sHour, sMin)
 	return dateString;
 	}
 	
+/*
+	This function handles updating the scheduled date for a given post/page in the list.
+	
+	id = the WordPress post/page id to update
+*/
 function schedule_posts_calendar_quick_schedule_update(id)
 	{
 	// Commit a schedule change to WordPress
@@ -205,6 +224,11 @@ function schedule_posts_calendar_quick_schedule_update(id)
 
 	}
 	
+/*
+	This function handles when the user click's cancel to the schedule action.
+
+	id = the WordPress post/page id to cancel
+*/
 function schedule_posts_calendar_quick_schedule_cancel(id)
 	{
 	// Find the table row we're editing.
@@ -229,6 +253,11 @@ function schedule_posts_calendar_quick_schedule_cancel(id)
 		}
 	}
 
+/*
+	This function will display the schedule quick edit for a given page/post.
+
+	id = the WordPress post/page id to cancel
+*/
 function schedule_posts_calendar_quick_schedule_edit(id)
 	{
 	// Find the table row and table we're editing.

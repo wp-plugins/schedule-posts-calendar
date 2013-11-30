@@ -17,10 +17,10 @@ This software is released under the GPL v2.0, see license.txt for details
 */
 
 /*
- *	This function is called to add the .css and .js files for the calendar to 
- *  the wordpress pages.
- *	It's registered at the end of the file with an add_action() call.
- */
+ 	This function is called to add the .css and .js files for the calendar to 
+    the wordpress pages.
+ 	It's registered at the end of the file with an add_action() call.
+*/
 function schedule_posts_calendar_add_cal($theme_num, $url) 
 	{
 	// Register and enqueue the calendar css files, create a theme string to use later during the javascript inclusion.
@@ -51,9 +51,9 @@ function schedule_posts_calendar_add_cal($theme_num, $url)
 	}
 
 /*
- *	This function is called to add the .css and .js files to the wordpress pages.
- *	It's registered at the end of the file with an add_action() call.
- */
+ 	This function is called to add the .css and .js files to the wordpress pages.
+ 	It's registered at the end of the file with an add_action() call.
+*/
 function schedule_posts_calendar() 
 	{
 	// Find out where our plugin is stored.
@@ -78,9 +78,9 @@ function schedule_posts_calendar()
 	}
 
 /*
- *	This function is called to add the .css and .js files to the wordpress list pages.
- *	It's registered at the end of the file with an add_action() call.
- */
+ 	This function is called to add the .css and .js files to the wordpress list pages.
+ 	It's registered at the end of the file with an add_action() call.
+*/
 function schedule_posts_calendar_quick_schedule() 
 	{
 	// Find out where our plugin is stored.
@@ -98,9 +98,9 @@ function schedule_posts_calendar_quick_schedule()
 	}
 
 /*
- *	This function is called when you select the admin page for the plugin, it generates the HTML
- *	and is responsible to store the settings.
- */
+ 	This function is called when you select the admin page for the plugin, it generates the HTML
+ 	and is responsible to store the settings.
+*/
 function schedule_posts_calendar_admin_page()
 	{
 	if( $_POST['schedule_posts_calendar'] ) 
@@ -180,10 +180,10 @@ function schedule_posts_calendar_admin_page()
 	}
 	
 /*
- *	This function is called to check if we need to add the above .css and .js files
- *	on this page.  ONLY the posts pages need to include the files, all other admin pages
- *	don't need them.
- */
+ 	This function is called to check if we need to add the above .css and .js files
+ 	on this page.  ONLY the posts pages need to include the files, all other admin pages
+ 	don't need them.
+*/
 function SCP_Add_Calendar_Includes()
 	{
 	// First check to make sure we have a server variable set to the script name, if we
@@ -214,17 +214,17 @@ function SCP_Add_Calendar_Includes()
 	}
 
 /*
- *	This function is called to add the options page to the settings menu.
- *	It's registered at the end of the file with an add_action() call.
- */	
+ 	This function is called to add the options page to the settings menu.
+ 	It's registered at the end of the file with an add_action() call.
+*/	
 function schedule_posts_calendar_admin()
 	{
 	add_options_page( 'Schedule Posts Calendar', 'Schedule Posts Calendar', 'manage_options', basename( __FILE__ ), 'schedule_posts_calendar_admin_page');
 	}	
 
-/**
- * Add the link to action list for post_row_actions.
- */
+/*
+   Add the link to action list for post_row_actions.
+*/
 function schedule_posts_calendar_link_row($actions, $post) 
 	{
 	$actions['schedule'] = '<a href="#" class="editinlineschedule" title="Schedule this item" onClick="schedule_posts_calendar_quick_schedule_edit(' . $post->ID . ');">Schedule</a>';
@@ -232,9 +232,9 @@ function schedule_posts_calendar_link_row($actions, $post)
 	return $actions;
 	}
 
-/**
- * Add the link to settings from the plugin list.
- */
+/*
+   Add the link to settings from the plugin list.
+*/
 function schedule_posts_calendar_plugin_actions( $actions, $plugin_file, $plugin_data, $context ) 
 	{
 	array_unshift( $actions, '<a href="' . admin_url() . 'options-general.php?page=schedule-posts-calendar.php">Settings</a>' );

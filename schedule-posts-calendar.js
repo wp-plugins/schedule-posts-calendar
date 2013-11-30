@@ -1,3 +1,8 @@
+/*
+	This function returns the index of specific JavaScript file we're looking for.
+	
+	name = the file name of the script to look for
+*/
 function GetScriptIndex(name)
 {
 	// Loop through all the scripts in the current document to find the one we want.
@@ -17,6 +22,9 @@ function GetScriptIndex(name)
 	return -1;
 }
 
+/*
+	This function retuns the value of a variable passed on the URI of a JavaScript file.
+*/
 function GetScriptVariable(index, name, vardef)
 {
 	// If a negitive index has been passed in it's because we didn't find any matching script with a query
@@ -54,6 +62,9 @@ function GetScriptVariable(index, name, vardef)
 	return vardef;
 }
 
+/*
+	This function adds the JavaScript calendar to the html elements on the post/pages page.
+*/
 function AddCalendar()
 {
 	// Find the timesteampdiv <div> in the current page.
