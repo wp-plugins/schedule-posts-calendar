@@ -27,10 +27,10 @@ function schedule_posts_calendar_add_cal($theme_num, $url)
 	switch( $theme_num )
 		{
 		case 2:
-			wp_register_style( 'dhtmlxcalendar_style', $url . '/skins/dhtmlxcalendar_dhx_web.css' );
+			wp_register_style( 'dhtmlxcalendar_style', $url . '/skins/dhtmlxcalendar_dhx_skyblue.css' );
 			break;
 		case 3:
-			wp_register_style( 'dhtmlxcalendar_style', $url . '/skins/dhtmlxcalendar_dhx_skyblue.css' );
+			wp_register_style( 'dhtmlxcalendar_style', $url . '/skins/dhtmlxcalendar_dhx_web.css' );
 			break;
 		case 4:
 			wp_register_style( 'dhtmlxcalendar_style', $url . '/skins/dhtmlxcalendar_dhx_terrace.css' );
