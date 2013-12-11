@@ -128,7 +128,7 @@ function schedule_posts_calendar_admin_page()
 <div class="wrap">
 	
 	<fieldset style="border:1px solid #cecece;padding:15px; margin-top:25px" >
-		<legend><span style="font-size: 24px; font-weight: 700;">Schedule Posts Calendar Options</span></legend>
+		<legend><span style="font-size: 24px; font-weight: 700;">&nbsp;Schedule Posts Calendar Options&nbsp;</span></legend>
 		<form method="post">
 			<div><?php _e('Start week on');?>: <Select name="schedule_posts_calendar[startofweek]">
 <?php
@@ -173,12 +173,14 @@ function schedule_posts_calendar_admin_page()
 	</fieldset>
 		
 	<fieldset style="border:1px solid #cecece;padding:15px; margin-top:25px" >
-			<legend><span style="font-size: 24px; font-weight: 700;">About</span></legend>
-			<p>Schedule Posts Calendar Version 3.0</p>
+		<legend><span style="font-size: 24px; font-weight: 700;">&nbsp;About&nbsp;</span></legend>
+			<p>Schedule Posts Calendar Version 3.5</p>
 			<p>by Greg Ross</p>
 			<p>&nbsp;</p>
 			<p>Licenced under the <a href="http://www.gnu.org/licenses/gpl-2.0.html" target=_blank>GPL Version 2</a></p>
-			<p>Visit the plug-in site at <a href="http://ToolStack.com/SchedulePostsCalendar" target=_blank>ToolStack.com</a>!</p>
+			<p>To find out more, please visit the <a href='http://wordpress.org/plugins/schedule-posts-calendar/' target=_blank>WordPress Plugin Directory page</a> or the plugin home page on <a href='http://toolstack.com/schedule-posts-calendar' target=_blank>ToolStack.com</a></p> 
+			<p>&nbsp;</p>
+			<p>Don't forget to <a href='http://wordpress.org/support/view/plugin-reviews/schedule-posts-calendar' target=_blank>rate and review</a> it too!</p>
 	</fieldset>
 </div>
 	<?php
