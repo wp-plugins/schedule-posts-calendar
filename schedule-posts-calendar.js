@@ -70,10 +70,8 @@ function AddCalendar()
 	// Find the timesteampdiv <div> in the current page.
 	var parent = document.getElementById('timestampdiv');
 	
-	// Clean up the Save/Cancel buttons, make Save a primary button and Cancel 
-	// a button instead of a link and move the Cancel button to the right hand side.
+	// Clean up the Cancel "button", make it a real button and align it to the right .
 	jQuery('.cancel-timestamp').addClass('button').css('float','right');
-	jQuery('.save-timestamp').addClass('button-primary');
 	
 	// If we didn't find the parent, don't bother doing anything else.
 	if( parent )

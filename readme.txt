@@ -50,7 +50,7 @@ If you are using IE in compatibility mode the calendar will overlap other areas,
 = 3.5 =
 * Updated to new dhtmlxcalendar calendar code (version 3.6 build 131108).
 * Support new dhtmlxcalendar theme 'Terrace' (now the default for new installs).
-* Re-styled Ok/Cancel button/links in the post/page edit, Ok is now a primary button and cancel is now a button aligned to the right.
+* Re-styled Cancel link in the post/page edit, it is now a button aligned to the right.
 * Added uninstall routine.
 * Tested with WordPress 3.8.
 
