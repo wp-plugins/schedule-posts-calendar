@@ -70,6 +70,11 @@ function AddCalendar()
 	// Find the timesteampdiv <div> in the current page.
 	var parent = document.getElementById('timestampdiv');
 	
+	// Clean up the Save/Cancel buttons, make Save a primary button and Cancel 
+	// a button instead of a link and move the Cancel button to the right hand side.
+	jQuery('.cancel-timestamp').addClass('button').css('float','right');
+	jQuery('.save-timestamp').addClass('button-primary');
+	
 	// If we didn't find the parent, don't bother doing anything else.
 	if( parent )
 		{
@@ -79,27 +84,32 @@ function AddCalendar()
 		var themenumber = GetScriptVariable(GSI, 'theme', '1');
 		var popupCalendar = GetScriptVariable(GSI, 'popupcalendar', 0);
 		var theme = '';
+		var calheight = '230px';
 		
-		if( themenumber == '3' )
+		switch( themenumber )
 			{
-			theme = 'dhx_web';
+			case '4':
+				theme = 'dhx_terrace';
+				calheight = '250px';
+				break;
+			case '3':
+				theme = 'dhx_web';
+				break;
+			case '2':
+				theme = 'dhx_skyblue';
+				break;
+			default:
+				theme = 'omega';
+				break;
 			}
-		else if( themenumber == '2' )
-			{
-			theme = 'dhx_skyblue';
-			}
-		else
-			{
-			theme = 'omega';
-			}
-		
+
 		// Create a new div element and setup it's style and id to be inserted.
 		if( popupCalendar == 0 )
 			{
 			// If we're using the inline calendar, make a div.
 			var elmnt = document.createElement("div");
 			elmnt.setAttribute('id', 'calendarHere');
-			elmnt.setAttribute('style', 'position:relative;height:230px;');
+			elmnt.setAttribute('style', 'position:relative;height:' + calheight + ';');
 			}
 		else
 			{
@@ -127,7 +137,7 @@ function AddCalendar()
 		startingDate.setHours(sHour);
 		startingDate.setMinutes(sMin);
 
-		// If we're replacing the stock WP fields, set the new field's starting date.  Make sure the formating looks right with 0 padded day/mon/hour/minute fields.
+		// If we're replacing the stock WP fields, set the new field's starting date.  Make sure the formatting looks right with 0 padded day/mon/hour/minute fields.
 		if( popupCalendar == 1 )
 			{
 			// The index returned is 0 based but we need it to be 1 based to create the string.
@@ -146,7 +156,7 @@ function AddCalendar()
 			document.getElementById('calendarHere').value = dateString;
 			}
 
-		// Finally create the calendar and replace the <div>/<input> we inserted earlier with the proper calendar control.  Also, set the calendar display properties and then finnally show the control.
+		// Finally create the calendar and replace the <div>/<input> we inserted earlier with the proper calendar control.  Also, set the calendar display properties and then finally show the control.
 		myCalendar = new dhtmlXCalendarObject("calendarHere");
 		myCalendar.setWeekStartDay(startOfWeek);
 		myCalendar.setDate(startingDate);

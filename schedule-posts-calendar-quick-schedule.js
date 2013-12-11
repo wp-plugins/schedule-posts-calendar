@@ -80,17 +80,21 @@ function AddCalendar(sDay, sMon, sYear, sHour, sMin, id)
 		var popupCalendar = GetScriptVariable(GSI, 'popupcalendar', 0);
 		var theme = '';
 
-		if( themenumber == '3' )
+		switch( themenumber )
 			{
-			theme = 'dhx_web';
-			}
-		else if( themenumber == '2' )
-			{
-			theme = 'dhx_skyblue';
-			}
-		else
-			{
-			theme = 'omega';
+			case '4':
+				theme = 'dhx_terrace';
+				parent.style.height = '250px';
+				break;
+			case '3':
+				theme = 'dhx_web';
+				break;
+			case '2':
+				theme = 'dhx_skyblue';
+				break;
+			default:
+				theme = 'omega';
+				break;
 			}
 
 		// Setup a date object to use to set the inital calendar date to display from the values in the WordPress controls.

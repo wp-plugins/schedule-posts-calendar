@@ -26,24 +26,23 @@ function schedule_posts_calendar_add_cal($theme_num, $url)
 	// Register and enqueue the calendar css files, create a theme string to use later during the javascript inclusion.
 	switch( $theme_num )
 		{
-		case 3:
-			wp_register_style( 'dhtmlxcalendar_style', $url . '/skins/dhtmlxcalendar_dhx_web.css' );
-			$theme = 'dhx_web';
-			break;
 		case 2:
+			wp_register_style( 'dhtmlxcalendar_style', $url . '/skins/dhtmlxcalendar_dhx_web.css' );
+			break;
+		case 3:
 			wp_register_style( 'dhtmlxcalendar_style', $url . '/skins/dhtmlxcalendar_dhx_skyblue.css' );
-			$theme = 'dhx_skyblue';
+			break;
+		case 4:
+			wp_register_style( 'dhtmlxcalendar_style', $url . '/skins/dhtmlxcalendar_dhx_terrace.css' );
 			break;
 		default:
 			wp_register_style( 'dhtmlxcalendar_style', $url . '/skins/dhtmlxcalendar_omega.css' );
-			$theme = 'omega';
 			break;
 		}
 
-	wp_register_style( 'dhtmlxcalendar_style', $url . '/skins/dhtmlxcalendar_omega.css' );
 	wp_register_style( 'dhtmlxcalendar', $url . '/dhtmlxcalendar.css' );
-    wp_enqueue_style( 'dhtmlxcalendar_style' );
-    wp_enqueue_style( 'dhtmlxcalendar' );
+	wp_enqueue_style( 'dhtmlxcalendar' );
+	wp_enqueue_style( 'dhtmlxcalendar_style' );
 
 	// Register and enqueue the calender scripts.
 	wp_register_script( 'dhtmlxcalendar', $url . '/dhtmlxcalendar.js' );
@@ -59,10 +58,12 @@ function schedule_posts_calendar()
 	// Find out where our plugin is stored.
 	$plugin_url = plugins_url( '', __FILE__ );
 	
-	// Retreive the options.
+	// Retrieve the options.
 	$options = get_option( 'schedule_posts_calendar' );
 	
-	// Register and enqueue the calendar css files, create a theme string to use later during the javascript inclusion.
+	if( !isset($options['theme']) ) { $options['theme'] = 4; }
+	
+	// Register and enqueue the calendar css files, create a theme string to use later during the JavaScript inclusion.
 	schedule_posts_calendar_add_cal( $options['theme'], $plugin_url );
 	
 	// Add the css file that will hide the default WordPress timestamp field.
@@ -106,7 +107,7 @@ function schedule_posts_calendar_admin_page()
 	if( $_POST['schedule_posts_calendar'] ) 
 		{
 		if( !isset( $_POST['schedule_posts_calendar']['startofweek'] ) ) { $_POST['schedule_posts_calendar']['startofweek'] = 7; }
-		if( !isset( $_POST['schedule_posts_calendar']['theme'] ) ) { $_POST['schedule_posts_calendar']['theme'] = 1; }
+		if( !isset( $_POST['schedule_posts_calendar']['theme'] ) ) { $_POST['schedule_posts_calendar']['theme'] = 4; }
 		if( !isset( $_POST['schedule_posts_calendar']['hide-timestamp'] ) ) { $_POST['schedule_posts_calendar']['hide-timestamp'] = 0; }
 		if( !isset( $_POST['schedule_posts_calendar']['popup-calendar'] ) ) { $_POST['schedule_posts_calendar']['popup-calendar'] = 0; }
 			
@@ -117,6 +118,11 @@ function schedule_posts_calendar_admin_page()
 
 		$options = get_option( 'schedule_posts_calendar' );
 
+		if( !isset( $options['startofweek'] ) ) { $options['startofweek'] = 7; }
+		if( !isset( $options['theme'] ) ) { $options['theme'] = 4; }
+		if( !isset( $options['hide-timestamp'] ) ) { $options['hide-timestamp'] = 0; }
+		if( !isset( $options['popup-calendar'] ) ) { $options['popup-calendar'] = 0; }
+		
 	//***** Start HTML
 	?>
 <div class="wrap">
@@ -141,9 +147,9 @@ function schedule_posts_calendar_admin_page()
 			
 			<div><?php _e('Calendar theme');?>: <Select name="schedule_posts_calendar[theme]">
 <?php
-			$themes = array( "Omega", "Sky Blue", "Web" );
+			$themes = array( "Omega", "Sky Blue", "Web", "Terrace" );
 			
-			for( $i = 0; $i < 3; $i++ )
+			for( $i = 0; $i < 4; $i++ )
 				{
 				echo "			<option value=" . ($i + 1);
 				if( $options['theme'] == $i + 1 ) { echo " SELECTED"; }

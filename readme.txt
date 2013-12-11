@@ -26,7 +26,7 @@ This code is released under the GPL v2, see license.txt for details.
 
 = What browsers are supported? =
 
-Try it and find out, the javascript to insert the calendar is pretty standard and has been tested on:
+Try it and find out, the JavaScript to insert the calendar is pretty standard and has been tested on:
 
 	* IE9 (note, do NOT use compatibility mode)
 	* Opera 11.6+
@@ -41,21 +41,28 @@ If you are using IE in compatibility mode the calendar will overlap other areas,
 1. The publish panel with the schedule menu expanded showing the calendar.
 2. The publish panel with the schedule menu expanded with the default WordPress date/time fields hidden.
 3. The publish panel with the default WP fields hidden and a popup calendar field.
-4. The publish panel with the default WP fields hidden and a popup calendar visable.
+4. The publish panel with the default WP fields hidden and a popup calendar visible.
 5. The control panel options.
 6. The schedule menu item in the posts/pages list.
 7. The schedule mode in the posts/pages list.
 
 == Changelog ==
+= 3.5 =
+* Updated to new dhtmlxcalendar calendar code (version 3.6 build 131108).
+* Support new dhtmlxcalendar theme 'Terrace' (now the default for new installs).
+* Re-styled Ok/Cancel button/links in the post/page edit, Ok is now a primary button and cancel is now a button aligned to the right.
+* Added uninstall routine.
+* Tested with WordPress 3.8.
+
 = 3.4 =
 * Bug fix on the quick edit theme selection code.
 
 = 3.3 =
 * Bug fix on the theme selection code, thanks JochenT.
-* Code update to resolve depricated use of role/responsibilities when adding the admin page, thanks JochenT.
+* Code update to resolve deprecated use of role/responsibilities when adding the admin page, thanks JochenT.
 
 = 3.2 =
-* Minor update, in pervious versions if you use the quick edit mode and make a change to the scheduled date it would not update the scheduled date in the list. 
+* Minor update, in previous versions if you use the quick edit mode and make a change to the scheduled date it would not update the scheduled date in the list. 
 * Test up to WordPress 3.4.1.
 
 = 3.1 =
@@ -65,14 +72,14 @@ If you are using IE in compatibility mode the calendar will overlap other areas,
 * Major update to include support for a schedule calendar in the posts/pages list.
 
 = 2.1 =
-* Minor bug fix that caused the inline calendar to start one month in the future.
+* Minor bug fix that caused the in-line calendar to start one month in the future.
 
 = 2.0 = 
 * Created settings page.
 * Added options to set the start of the week.
 * Added theme option.
 * Added option to hide default WordPress date/time fields.
-* Added popup option to the calendar instead of the default inline.
+* Added popup option to the calendar instead of the default in-line.
 
 = 1.1 =
 * Minor update to reduce the size of the calendar div from 250px to 230px.
@@ -82,7 +89,7 @@ If you are using IE in compatibility mode the calendar will overlap other areas,
 * Initial release.
 
 == Upgrade Notice ==
-= 3.4 =
+= 3.5 =
 None.
 
 == Roadmap ==
