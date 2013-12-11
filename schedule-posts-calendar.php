@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: Schedule Posts Calendar
-Version: 3.4
+Version: 3.5
 Plugin URI: http://toolstack.com/SchedulePostsCalendar
 Author: Greg Ross
 Author URI: http://toolstack.com
-Description: Adds a javascript calendar to the schedule posts options.
+Description: Adds a JavaScript calendar to the schedule posts options.
 
 Compatible with WordPress 3+.
 
@@ -23,7 +23,7 @@ This software is released under the GPL v2.0, see license.txt for details
 */
 function schedule_posts_calendar_add_cal($theme_num, $url) 
 	{
-	// Register and enqueue the calendar css files, create a theme string to use later during the javascript inclusion.
+	// Register and enqueue the calendar css files, create a theme string to use later during the JavaScript inclusion.
 	switch( $theme_num )
 		{
 		case 2:
