@@ -1,4 +1,9 @@
 /*
+	Set the globals, we'll need this for later if we need to access the calendar
+*/
+var SchedulePostsCalendar = null;
+
+/*
 	This function returns the index of specific JavaScript file we're looking for.
 	
 	name = the file name of the script to look for
@@ -107,19 +112,19 @@ function AddCalendar(sDay, sMon, sYear, sHour, sMin, id)
 
 
 		// Finally create the calendar and replace the <div>/<input> we inserted earlier with the proper calendar control.  Also, set the calendar display properties and then finnally show the control.
-		myCalendar = new dhtmlXCalendarObject("calendarHere-" + id);
-		myCalendar.setWeekStartDay(startOfWeek);
-		myCalendar.setDate(startingDate);
-		myCalendar.setSkin(theme);
-		myCalendar.setDateFormat('%d/%m/%Y %H:%i');
+		SchedulePostsCalendar = new dhtmlXCalendarObject("calendarHere-" + id);
+		SchedulePostsCalendar.setWeekStartDay(startOfWeek);
+		SchedulePostsCalendar.setDate(startingDate);
+		SchedulePostsCalendar.setSkin(theme);
+		SchedulePostsCalendar.setDateFormat('%d/%m/%Y %H:%i');
 
-		myCalendar.show();
+		SchedulePostsCalendar.show();
 				
 		// We have to attach two events to the calendar to catch when the user clicks on a new date or time.  They both do the exactly same thing, but the first catches the date change and the second the time change.
-		var myEvent = myCalendar.attachEvent("onClick", function (selectedDate){
+		var myEvent = SchedulePostsCalendar.attachEvent("onClick", function (selectedDate){
 				document.getElementById('eis_date_value_' + id).value = eis_format_date( selectedDate.getDate(), selectedDate.getMonth()+1, selectedDate.getFullYear(), selectedDate.getHours(), selectedDate.getMinutes() );
 				})
-		var myEvent = myCalendar.attachEvent("onChange", function (selectedDate){
+		var myEvent = SchedulePostsCalendar.attachEvent("onChange", function (selectedDate){
 				document.getElementById('eis_date_value_' + id).value = eis_format_date( selectedDate.getDate(), selectedDate.getMonth()+1, selectedDate.getFullYear(), selectedDate.getHours(), selectedDate.getMinutes() );
 				})
 	}
@@ -258,6 +263,20 @@ function schedule_posts_calendar_quick_schedule_cancel(id)
 	}
 
 /*
+	This function will reset the calendar to today.
+
+	id = the WordPress post/page id to cancel
+*/
+function schedule_posts_calendar_quick_schedule_today(id)
+	{
+	var currentDate = new Date();
+
+	SchedulePostsCalendar.setDate(currentDate);
+	
+	document.getElementById('eis_date_value_' + id).value = eis_format_date( currentDate.getDate(), currentDate.getMonth()+1, currentDate.getFullYear(), currentDate.getHours(), currentDate.getMinutes() );
+	}
+	
+/*
 	This function will display the schedule quick edit for a given page/post.
 
 	id = the WordPress post/page id to cancel
@@ -331,8 +350,10 @@ function schedule_posts_calendar_quick_schedule_edit(id)
 	new_cell.innerHTML += "<div id='calendarHere-" + id + "' style='position:relative;height:230px;'></div>";
 	// Create the cancel button.
 	new_cell.innerHTML += '<a accesskey="c" href="#" title="Cancel" class="button-secondary cancel alignleft" onclick="schedule_posts_calendar_quick_schedule_cancel(' + id + ')">Cancel</a>';
+	// Create the today button.
+	new_cell.innerHTML += '<a accesskey="t" href="#" title="Today" class="button-secondary alignleft" onclick="schedule_posts_calendar_quick_schedule_today(' + id + ')" style="margin-left:20px">Today</a>';
 	// Create the update button.
-	new_cell.innerHTML += '<a accesskey="s" href="#" title="Update" class="button-primary save alignleft" onclick="schedule_posts_calendar_quick_schedule_update(' + id + ')" style="margin-left:70px">Update</a>';
+	new_cell.innerHTML += '<a accesskey="s" href="#" title="Update" class="button-primary save alignleft" onclick="schedule_posts_calendar_quick_schedule_update(' + id + ')" style="margin-left:20px">Update</a>';
 	// Add a space at the end to give some buffer between the bottom of the buttons and the
 	// next row.
 	new_cell.innerHTML += "<BR>&nbsp;";

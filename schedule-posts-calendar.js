@@ -1,4 +1,9 @@
 /*
+	Set the globals, we'll need this for later if we need to access the calendar
+*/
+var SchedulePostsCalendar = null;
+
+/*
 	This function returns the index of specific JavaScript file we're looking for.
 	
 	name = the file name of the script to look for
@@ -63,6 +68,42 @@ function GetScriptVariable(index, name, vardef)
 }
 
 /*
+	This function will reset the calendar to today.
+
+	id = the WordPress post/page id to cancel
+*/
+function schedule_posts_calendar_today()
+	{
+	var currentDate = new Date();
+
+	SchedulePostsCalendar.setDate(currentDate);
+
+	var sDay = new String(currentDate.getDate());
+	var sMon = new String(currentDate.getMonth());
+	var sYear = new String(currentDate.getFullYear());
+	var sHour = new String(currentDate.getHours());
+	var sMin = new String(currentDate.getMinutes());
+
+	var dateString = '';
+	if( sDay.length < 2 ) { sDay = '0' + sDay; }
+	dateString += sDay + '/';
+	if( sMon.length < 2 ) { sMon = '0' + sMon; }
+	dateString += sMon + '/' + sYear + ' ';
+	if( sHour.length < 2 ) { sHour = '0' + sHour; }
+	dateString += sHour + ':';
+	if( sMin.length < 2 ) { sMin = '0' + sMin; }
+	dateString += sMin;
+	
+	document.getElementById('mm').selectedIndex = sMon;
+	document.getElementById('jj').value = sDay;
+	document.getElementById('aa').value = sYear;
+	document.getElementById('hh').value = sHour;
+	document.getElementById('mn').value = sMin;
+	
+	document.getElementById('calendarHere').value = dateString;
+	}
+	
+/*
 	This function adds the JavaScript calendar to the html elements on the post/pages page.
 */
 function AddCalendar()
@@ -71,7 +112,14 @@ function AddCalendar()
 	var parent = document.getElementById('timestampdiv');
 	
 	// Clean up the Cancel "button", make it a real button and align it to the right .
-	jQuery('.cancel-timestamp').addClass('button').css('float','right');
+	jQuery('.cancel-timestamp').addClass('button').css('margin-left','30px');
+
+	jQuery('.save-timestamp').css('float','left');
+	
+	// Create the today button.
+	todayButton = '<a accesskey="t" href="#" title="Today" class="button-secondary alignleft" onclick="schedule_posts_calendar_today()" style="margin-left:30px">Today</a>';
+	
+	jQuery( todayButton ).insertBefore('.cancel-timestamp');
 	
 	// If we didn't find the parent, don't bother doing anything else.
 	if( parent )
@@ -127,7 +175,7 @@ function AddCalendar()
 		var sHour = new String(document.getElementById('hh').value);
 		var sMin = new String(document.getElementById('mn').value);
 		
-		// Setup a date object to use to set the inital calendar date to display from the values in the WordPress controls.
+		// Setup a date object to use to set the initial calendar date to display from the values in the WordPress controls.
 		var startingDate = new Date();
 		startingDate.setDate(sDay);
 		startingDate.setMonth(sMon);
@@ -155,23 +203,23 @@ function AddCalendar()
 			}
 
 		// Finally create the calendar and replace the <div>/<input> we inserted earlier with the proper calendar control.  Also, set the calendar display properties and then finally show the control.
-		myCalendar = new dhtmlXCalendarObject("calendarHere");
-		myCalendar.setWeekStartDay(startOfWeek);
-		myCalendar.setDate(startingDate);
-		myCalendar.setSkin(theme);
-		myCalendar.setDateFormat('%d/%m/%Y %H:%i');
+		SchedulePostsCalendar = new dhtmlXCalendarObject("calendarHere");
+		SchedulePostsCalendar.setWeekStartDay(startOfWeek);
+		SchedulePostsCalendar.setDate(startingDate);
+		SchedulePostsCalendar.setSkin(theme);
+		SchedulePostsCalendar.setDateFormat('%d/%m/%Y %H:%i');
 
 		// Only show the calendar if its inline
-		if( popupCalendar == 0 ) { myCalendar.show(); }
+		if( popupCalendar == 0 ) { SchedulePostsCalendar.show(); }
 		
 		// We have to attach two events to the calendar to catch when the user clicks on a new date or time.  They both do the exactly same thing, but the first catches the date change and the second the time change.
-		var myEvent = myCalendar.attachEvent("onClick", function (selectedDate){
+		var myEvent = SchedulePostsCalendar.attachEvent("onClick", function (selectedDate){
 				document.getElementById('mm').selectedIndex = selectedDate.getMonth();
 				document.getElementById('jj').value = selectedDate.getDate();
 				document.getElementById('aa').value = selectedDate.getFullYear();
 				document.getElementById('hh').value = selectedDate.getHours();
 				document.getElementById('mn').value = selectedDate.getMinutes();})
-		var myEvent = myCalendar.attachEvent("onChange", function (selectedDate){
+		var myEvent = SchedulePostsCalendar.attachEvent("onChange", function (selectedDate){
 				document.getElementById('mm').selectedIndex = selectedDate.getMonth();
 				document.getElementById('jj').value = selectedDate.getDate();
 				document.getElementById('aa').value = selectedDate.getFullYear();
