@@ -28,11 +28,11 @@ function GetScriptIndex(name)
 }
 
 /*
-	This function retuns the value of a variable passed on the URI of a JavaScript file.
+	This function returns the value of a variable passed on the URI of a JavaScript file.
 */
 function GetScriptVariable(index, name, vardef)
 {
-	// If a negitive index has been passed in it's because we didn't find any matching script with a query
+	// If a negative index has been passed in it's because we didn't find any matching script with a query
 	// string, so just return the default value.
 	if( index < 0 )
 		{
@@ -43,7 +43,7 @@ function GetScriptVariable(index, name, vardef)
 	var tmp_src = String(document.scripts[index].src);
 	var qs_index = tmp_src.indexOf('?');
 
-	// Split the query string ino var/value pairs.  ie: 'var1=value1', 'var2=value2', ...
+	// Split the query string in to var/value pairs.  ie: 'var1=value1', 'var2=value2', ...
 	var params_raw = tmp_src.substr(qs_index + 1).split('&');
 
 	// Now look for the one we want.
@@ -55,7 +55,7 @@ function GetScriptVariable(index, name, vardef)
 		// If this is the one we're looking for, simply return it.
 		if( pp_raw[0] == name )
 			{
-			// Check to make sure a value was actualy passed in, otherwise we should return the default later on.
+			// Check to make sure a value was actually passed in, otherwise we should return the default later on.
 			if( typeof(pp_raw[1]) != 'undefined' )
 				{
 				return pp_raw[1];
@@ -78,7 +78,7 @@ function AddCalendar(sDay, sMon, sYear, sHour, sMin, id)
 	// If we didn't find the parent, don't bother doing anything else.
 	if( parent )
 		{
-		// Retrive the script options from the URI
+		// Retrieve the script options from the URI
 		var GSI = GetScriptIndex('schedule-posts-calendar-quick-schedule.js');
 		var startOfWeek = GetScriptVariable(GSI, 'startofweek', 7);
 		var themenumber = GetScriptVariable(GSI, 'theme', 'omega');
@@ -102,7 +102,7 @@ function AddCalendar(sDay, sMon, sYear, sHour, sMin, id)
 				break;
 			}
 
-		// Setup a date object to use to set the inital calendar date to display from the values in the WordPress controls.
+		// Setup a date object to use to set the initial calendar date to display from the values in the WordPress controls.
 		var startingDate = new Date();
 		startingDate.setDate(sDay);
 		startingDate.setMonth(sMon);
@@ -111,7 +111,7 @@ function AddCalendar(sDay, sMon, sYear, sHour, sMin, id)
 		startingDate.setMinutes(sMin);
 
 
-		// Finally create the calendar and replace the <div>/<input> we inserted earlier with the proper calendar control.  Also, set the calendar display properties and then finnally show the control.
+		// Finally create the calendar and replace the <div>/<input> we inserted earlier with the proper calendar control.  Also, set the calendar display properties and then finally show the control.
 		SchedulePostsCalendar = new dhtmlXCalendarObject("calendarHere-" + id);
 		SchedulePostsCalendar.setWeekStartDay(startOfWeek);
 		SchedulePostsCalendar.setDate(startingDate);
@@ -167,8 +167,8 @@ function schedule_posts_calendar_quick_schedule_update(id)
 	// Split the time in to its parts.
 	var new_time_parts = new_date_split[1].split(':');
 	
-	// Using the id's we assigned to the hidden values that wordpress uses for the quick edit mode
-	// assgin the new date to the wordpress variables so if the user now clicks on quick edit, the
+	// Using the id's we assigned to the hidden values that WordPress uses for the quick edit mode
+	// assign the new date to the WordPress variables so if the user now clicks on quick edit, the
 	// new date will be displayed instead of the old one.
 	document.getElementById('eis_month_' + id).innerHTML = new_date_parts[1].trim();
 	document.getElementById('eis_day_' + id).innerHTML = new_date_parts[0].trim();
@@ -176,7 +176,7 @@ function schedule_posts_calendar_quick_schedule_update(id)
 	document.getElementById('eis_hour_' + id).innerHTML = new_time_parts[0].trim();
 	document.getElementById('eis_minute_' + id).innerHTML = new_time_parts[1].trim();
 
-	// jQuery conflicts with the calenddar control, so use it in noConflict mode.
+	// jQuery conflicts with the calendar control, so use it in noConflict mode.
 	var $jq = jQuery.noConflict();
 	
 	// Most of the remaining code in this function is pulled straight from WordPress's quick 
@@ -191,7 +191,7 @@ function schedule_posts_calendar_quick_schedule_update(id)
 	// Show the spinning save icon.  I don't think this works at the moment.
 	$jq('table.widefat .inline-edit-save .waiting').show();
 
-	// setup the inital params we're going to pass in to the ajax call.
+	// setup the initial params we're going to pass in to the ajax call.
 	seed_params = {
 		action: 'inline-save',
 		post_type: typenow,
@@ -200,7 +200,7 @@ function schedule_posts_calendar_quick_schedule_update(id)
 		post_status: page
 	};
 
-	// build the rest of the params, inlcuding the date/time (mm, aa, jj, mn, hh), the inline 
+	// build the rest of the params, including the date/time (mm, aa, jj, mn, hh), the inline 
 	// edit value and the post id.
 	fields = "mm=" + new_date_parts[1].trim() + "&aa=" + new_date_parts[2].trim() + "&jj=" + new_date_parts[0].trim() + "&mn=" + new_time_parts[1].trim() + "&hh=" + new_time_parts[0].trim() + "&_inline_edit=" + document.getElementById('_inline_edit').value + "&post_ID=" + id;
 		
@@ -294,7 +294,7 @@ function schedule_posts_calendar_quick_schedule_edit(id)
 	// Assign an id to the new row.
 	new_row.id = "editinlineschedule-" + id;
 	
-	// Assgin the classes to the new row.
+	// Assign the classes to the new row.
 	new_row.className = "inline-edit-row inline-edit-row-post inline-edit-post quick-edit-row quick-edit-row-post inline-edit-post";
 	
 	// Set our new cell to span all the columns in the table.

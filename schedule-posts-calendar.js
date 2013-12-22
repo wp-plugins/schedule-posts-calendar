@@ -28,11 +28,11 @@ function GetScriptIndex(name)
 }
 
 /*
-	This function retuns the value of a variable passed on the URI of a JavaScript file.
+	This function returns the value of a variable passed on the URI of a JavaScript file.
 */
 function GetScriptVariable(index, name, vardef)
 {
-	// If a negitive index has been passed in it's because we didn't find any matching script with a query
+	// If a negative index has been passed in it's because we didn't find any matching script with a query
 	// string, so just return the default value.
 	if( index < 0 )
 		{
@@ -43,7 +43,7 @@ function GetScriptVariable(index, name, vardef)
 	var tmp_src = String(document.scripts[index].src);
 	var qs_index = tmp_src.indexOf('?');
 
-	// Split the query string ino var/value pairs.  ie: 'var1=value1', 'var2=value2', ...
+	// Split the query string in to var/value pairs.  ie: 'var1=value1', 'var2=value2', ...
 	var params_raw = tmp_src.substr(qs_index + 1).split('&');
 
 	// Now look for the one we want.
@@ -55,7 +55,7 @@ function GetScriptVariable(index, name, vardef)
 		// If this is the one we're looking for, simply return it.
 		if( pp_raw[0] == name )
 			{
-			// Check to make sure a value was actualy passed in, otherwise we should return the default later on.
+			// Check to make sure a value was actually passed in, otherwise we should return the default later on.
 			if( typeof(pp_raw[1]) != 'undefined' )
 				{
 				return pp_raw[1];
