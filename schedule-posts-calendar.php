@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Schedule Posts Calendar
-Version: 3.5
+Version: 3.6
 Plugin URI: http://toolstack.com/SchedulePostsCalendar
 Author: Greg Ross
 Author URI: http://toolstack.com
@@ -18,7 +18,8 @@ This software is released under the GPL v2.0, see license.txt for details
 
 /*
  	This function is called to add the .css and .js files for the calendar to 
-    the wordpress pages.
+    the WordPress pages.
+	
  	It's registered at the end of the file with an add_action() call.
 */
 function schedule_posts_calendar_add_cal($theme_num, $url) 
@@ -50,7 +51,7 @@ function schedule_posts_calendar_add_cal($theme_num, $url)
 	}
 
 /*
- 	This function is called to add the .css and .js files to the wordpress pages.
+ 	This function is called to add the .css and .js files to the WordPress pages.
  	It's registered at the end of the file with an add_action() call.
 */
 function schedule_posts_calendar() 
@@ -79,7 +80,7 @@ function schedule_posts_calendar()
 	}
 
 /*
- 	This function is called to add the .css and .js files to the wordpress list pages.
+ 	This function is called to add the .css and .js files to the WordPress list pages.
  	It's registered at the end of the file with an add_action() call.
 */
 function schedule_posts_calendar_quick_schedule() 
@@ -87,10 +88,10 @@ function schedule_posts_calendar_quick_schedule()
 	// Find out where our plugin is stored.
 	$plugin_url = plugins_url( '', __FILE__ );
 	
-	// Retreive the options.
+	// Retrieve the options.
 	$options = get_option( 'schedule_posts_calendar' );
 
-	// Register and enqueue the calendar css files, create a theme string to use later during the javascript inclusion.
+	// Register and enqueue the calendar css files, create a theme string to use later during the JavaScript inclusion.
 	schedule_posts_calendar_add_cal( $options['theme'], $plugin_url );
 
 	// Register and enqueue the calender scripts.

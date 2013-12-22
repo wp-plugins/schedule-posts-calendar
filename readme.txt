@@ -5,7 +5,7 @@ Author URI: http://toolstack.com
 Tags: admin posts calendar
 Requires at least: 3.0.0
 Tested up to: 3.8.0
-Stable tag: 3.5
+Stable tag: 3.6
 
 Adds a JavaScript calendar to the scheduled publish widget to allow you to select a date and time graphically instead of via the text entry boxes.
 
@@ -47,6 +47,9 @@ If you are using IE in compatibility mode the calendar will overlap other areas,
 7. The schedule mode in the posts/pages list.
 
 == Changelog ==
+= 3.6 =
+* Add 'Today' button to reset the calendar to the current date.
+
 = 3.5 =
 * Updated to new dhtmlxcalendar calendar code (version 3.6 build 131108).
 * Support new dhtmlxcalendar theme 'Terrace' (now the default for new installs).
@@ -89,7 +92,7 @@ If you are using IE in compatibility mode the calendar will overlap other areas,
 * Initial release.
 
 == Upgrade Notice ==
-= 3.5 =
+= 3.6 =
 None.
 
 == Roadmap ==
