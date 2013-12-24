@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Schedule Posts Calendar
-Version: 3.6
+Version: 4.0
 Plugin URI: http://toolstack.com/SchedulePostsCalendar
 Author: Greg Ross
 Author URI: http://toolstack.com
@@ -326,7 +326,7 @@ function schedule_posts_calendar_admin_page()
 
 	<fieldset style="border:1px solid #cecece;padding:15px; margin-top:25px" >
 		<legend><span style="font-size: 24px; font-weight: 700;">&nbsp;About&nbsp;</span></legend>
-			<p>Schedule Posts Calendar Version 3.5</p>
+			<p>Schedule Posts Calendar Version 4.0</p>
 			<p>by Greg Ross</p>
 			<p>&nbsp;</p>
 			<p>Licenced under the <a href="http://www.gnu.org/licenses/gpl-2.0.html" target=_blank>GPL Version 2</a></p>
@@ -402,35 +402,63 @@ function schedule_posts_calendar_plugin_actions( $actions, $plugin_file, $plugin
 	return $actions;
 	}
 	
+/*
+	Add a function that the JavaScript code can use to retrieve translation information for.
+*/
 function schedule_posts_calendar_lang()
 	{
+	// Get the options.
 	$options = get_option( 'schedule_posts_calendar' );
 
+	// If the 'enable-translation' option hasn't been set yet, for example if the settings
+	// haven't been saved since the upgrade, assume translations should be enabled.
 	if( !isset( $options['enable-translation'] ) ) { $options['enable-translation'] = 1; }
 	
+	// We're outputting the script no matter what (so we don't have to check for the function's
+	// existence in the JavaScript code, so setup the first part of it.
+	// Note we make it a function for two reasons:
+	//     1. GLOBALs are BAD
+	//     2. We're early enough in the code that the dhtmlXCalendar code hasn't been
+	//        added yet so the object definition isn't available to use.
 	echo '<script type="text/javascript">' . "\n";
 	echo 'function SchedulePostsCalenderLang() {' . "\n";
-	echo '    dhtmlXCalendarObject.prototype.langData["wordpress"] = {' . "\n";
-
-	if( $options['override-translation'] == 1 )
+	
+	// Check to see if translation is enabled
+	if( $options['enable-translation'] == 0 )
 		{
-		echo '        monthesFNames: ["' . $options['FMNJanuary'] . '","' . $options['FMNFebruary'] . '","' . $options['FMNMarch'] . '","' . $options['FMNApril'] . '","' . $options['FMNMay'] . '","' . $options['FMNJune'] . '","' . $options['FMNJuly'] . '","' . $options['FMNAugust'] . '","' . $options['FMNSeptember'] . '","' . $options['FMNOctober'] . '","' . $options['FMNNovember'] . '","' . $options['FMNDecember'] . '"],' . "\n";
-		echo '        monthesSNames: ["' . $options['SMNJanuary'] . '","' . $options['SMNFebruary'] . '","' . $options['SMNMarch'] . '","' . $options['SMNApril'] . '","' . $options['SMNMay'] . '","' . $options['SMNJune'] . '","' . $options['SMNJuly'] . '","' . $options['SMNAugust'] . '","' . $options['SMNSeptember'] . '","' . $options['SMNOctober'] . '","' . $options['SMNNovember'] . '","' . $options['SMNDecember'] . '"],' . "\n";
-		echo '        daysFNames: ["' . $options['FDNSunday'] . '","' . $options['FDNMonday'] . '","' . $options['FDNTuesday'] . '","' . $options['FDNWednesday'] . '","' . $options['FDNThursday'] . '","' . $options['FDNFriday'] . '","' . $options['FDNSaturday'] . '"],' . "\n";
-		echo '        daysSNames: ["' . $options['SDNSunday'] . '","' . $options['SDNMonday'] . '","' . $options['SDNTuesday'] . '","' . $options['SDNWednesday'] . '","' . $options['SDNThursday'] . '","' . $options['SDNFriday'] . '","' . $options['SDNSaturday'] . '"],' . "\n";
-		echo '        };' . "\n";
-		echo '    var langs = { Today:"' . $options["Today"] . '", Cancel:"' . $options["Cancel"] . '", Update:"' . $options["Update"] . '", OK:"' . $options["OK"] . '"};' . "\n";
+		// Let's create the update code for the dhtmlXCalendar.
+		echo '    dhtmlXCalendarObject.prototype.langData["wordpress"] = {' . "\n";
+
+		// Check to see if we're using the WordPress translation or not
+		if( $options['override-translation'] == 1 )
+			{
+			// Overriding may be useful if the WordPress functions don't return 'good' translations.
+			echo '        monthesFNames: ["' . $options['FMNJanuary'] . '","' . $options['FMNFebruary'] . '","' . $options['FMNMarch'] . '","' . $options['FMNApril'] . '","' . $options['FMNMay'] . '","' . $options['FMNJune'] . '","' . $options['FMNJuly'] . '","' . $options['FMNAugust'] . '","' . $options['FMNSeptember'] . '","' . $options['FMNOctober'] . '","' . $options['FMNNovember'] . '","' . $options['FMNDecember'] . '"],' . "\n";
+			echo '        monthesSNames: ["' . $options['SMNJanuary'] . '","' . $options['SMNFebruary'] . '","' . $options['SMNMarch'] . '","' . $options['SMNApril'] . '","' . $options['SMNMay'] . '","' . $options['SMNJune'] . '","' . $options['SMNJuly'] . '","' . $options['SMNAugust'] . '","' . $options['SMNSeptember'] . '","' . $options['SMNOctober'] . '","' . $options['SMNNovember'] . '","' . $options['SMNDecember'] . '"],' . "\n";
+			echo '        daysFNames: ["' . $options['FDNSunday'] . '","' . $options['FDNMonday'] . '","' . $options['FDNTuesday'] . '","' . $options['FDNWednesday'] . '","' . $options['FDNThursday'] . '","' . $options['FDNFriday'] . '","' . $options['FDNSaturday'] . '"],' . "\n";
+			echo '        daysSNames: ["' . $options['SDNSunday'] . '","' . $options['SDNMonday'] . '","' . $options['SDNTuesday'] . '","' . $options['SDNWednesday'] . '","' . $options['SDNThursday'] . '","' . $options['SDNFriday'] . '","' . $options['SDNSaturday'] . '"],' . "\n";
+			echo '        };' . "\n";
+			echo '    var langs = { Today:"' . $options["Today"] . '", Cancel:"' . $options["Cancel"] . '", Update:"' . $options["Update"] . '", OK:"' . $options["OK"] . '"};' . "\n";
+			}
+		else
+			{
+			// Of course, WordPress is probably fine so just use it.
+			echo '        monthesFNames: ["' . __("January") . '","' . __("February") . '","' . __("March") . '","' . __("April") . '","' . __("May") . '","' . __("June") . '","' . __("July") . '","' . __("August") . '","' . __("September") . '","' . __("October") . '","' . __("November") . '","' . __("December") . '"],' . "\n";
+			echo '        monthesSNames: ["' . __("Jan") . '","' . __("Feb") . '","' . __("Mar") . '","' . __("Apr") . '","' . __("May") . '","' . __("Jun") . '","' . __("Jul") . '","' . __("Aug") . '","' . __("Sep") . '","' . __("Oct") . '","' . __("Nov") . '","' . __("Dec") . '"],' . "\n";
+			echo '        daysFNames: ["' . __("Sunday") . '","' . __("Monday") . '","' . __("Tuesday") . '","' . __("Wednesday") . '","' . __("Thursday") . '","' . __("Friday") . '","' . __("Saturday") . '"],' . "\n";
+			echo '        daysSNames: ["' . __("Sun") . '","' . __("Mon") . '","' . __("Tues") . '","' . __("Wed") . '","' . __("Thur") . '","' . __("Fri") . '","' . __("Sat") . '"]' . "\n";
+			echo '        };' . "\n";
+			echo '    var langs = { Today:"' . __("Today") . '", Cancel:"' . __("Cancel") . '", Update:"' . __("Update") . '", OK:"' . __("OK") . '"};' . "\n";
+			}
 		}
 	else
 		{
-		echo '        monthesFNames: ["' . __("January") . '","' . __("February") . '","' . __("March") . '","' . __("April") . '","' . __("May") . '","' . __("June") . '","' . __("July") . '","' . __("August") . '","' . __("September") . '","' . __("October") . '","' . __("November") . '","' . __("December") . '"],' . "\n";
-		echo '        monthesSNames: ["' . __("Jan") . '","' . __("Feb") . '","' . __("Mar") . '","' . __("Apr") . '","' . __("May") . '","' . __("Jun") . '","' . __("Jul") . '","' . __("Aug") . '","' . __("Sep") . '","' . __("Oct") . '","' . __("Nov") . '","' . __("Dec") . '"],' . "\n";
-		echo '        daysFNames: ["' . __("Sunday") . '","' . __("Monday") . '","' . __("Tuesday") . '","' . __("Wednesday") . '","' . __("Thursday") . '","' . __("Friday") . '","' . __("Saturday") . '"],' . "\n";
-		echo '        daysSNames: ["' . __("Sun") . '","' . __("Mon") . '","' . __("Tues") . '","' . __("Wed") . '","' . __("Thur") . '","' . __("Fri") . '","' . __("Sat") . '"]' . "\n";
-		echo '        };' . "\n";
-		echo '    var langs = { Today:"' . __("Today") . '", Cancel:"' . __("Cancel") . '", Update:"' . __("Update") . '", OK:"' . __("OK") . '"};' . "\n";
+		// If translation is disabled, we don't touch the dhmtlXCalendar object but we still need to return some
+		// misc. strings for us to use.
+		echo '    var langs = { Today:"Today", Cancel:"Cancel", Update:"Update", OK:"OK"};' . "\n";
 		}
 		
+	// Finish off the function and close the script.
 	echo '    return langs;' . "\n";
 	echo '    }' . "\n";
 	echo '</script>' . "\n";
