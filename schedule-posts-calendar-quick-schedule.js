@@ -358,11 +358,11 @@ function schedule_posts_calendar_quick_schedule_edit(id)
 	// Create a div to create the calendar in.
 	new_cell.innerHTML += "<div id='calendarHere-" + id + "' style='position:relative;height:230px;'></div>";
 	// Create the cancel button.
-	new_cell.innerHTML += '<a accesskey="c" href="#" title="Cancel" class="button-secondary cancel alignleft" onclick="schedule_posts_calendar_quick_schedule_cancel(' + id + ')">Cancel</a>';
+	new_cell.innerHTML += '<a accesskey="c" href="#" title="' + langs["Cancel"] + '" class="button-secondary cancel alignleft" onclick="schedule_posts_calendar_quick_schedule_cancel(' + id + ')">' + langs["Cancel"] + '</a>';
 	// Create the today button.
 	new_cell.innerHTML += '<a accesskey="t" href="#" title="' + langs["Today"] + '" class="button-secondary alignleft" onclick="schedule_posts_calendar_quick_schedule_today()" style="margin-left:20px">' + langs["Today"] + '</a>';
 	// Create the update button.
-	new_cell.innerHTML += '<a accesskey="s" href="#" title="Update" class="button-primary save alignleft" onclick="schedule_posts_calendar_quick_schedule_update(' + id + ')" style="margin-left:20px">Update</a>';
+	new_cell.innerHTML += '<a accesskey="s" href="#" title="' + langs["Update"] + '" class="button-primary save alignleft" onclick="schedule_posts_calendar_quick_schedule_update(' + id + ')" style="margin-left:20px">' + langs["Update"] + '</a>';
 	// Add a space at the end to give some buffer between the bottom of the buttons and the
 	// next row.
 	new_cell.innerHTML += "<BR>&nbsp;";
