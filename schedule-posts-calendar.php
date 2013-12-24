@@ -251,19 +251,42 @@ function schedule_posts_calendar_plugin_actions( $actions, $plugin_file, $plugin
 	return $actions;
 	}
 	
+function schedule_posts_calendar_lang()
+	{
+	echo '<script type="text/javascript">' . "\n";
+	echo 'function SchedulePostsCalenderLang() {' . "\n";
+	echo '    dhtmlXCalendarObject.prototype.langData["wordpress"] = {' . "\n";
+	echo '        monthesFNames: ["' . __("January") . '","' . __("February") . '","' . __("March") . '","' . __("April") . '","' . __("May") . '","' . __("June") . '","' . __("July") . '","' . __("August") . '","' . __("September") . '","' . __("October") . '","' . __("November") . '","' . __("December") . '"],' . "\n";
+	echo '        monthesSNames: ["' . __("Jan") . '","' . __("Feb") . '","' . __("Mar") . '","' . __("Apr") . '","' . __("May") . '","' . __("Jun") . '","' . __("Jul") . '","' . __("Aug") . '","' . __("Sep") . '","' . __("Oct") . '","' . __("Nov") . '","' . __("Dec") . '"],' . "\n";
+	echo '        daysFNames: ["' . __("Sunday") . '","' . __("Monday") . '","' . __("Tuesday") . '","' . __("Wednesday") . '","' . __("Thursday") . '","' . __("Friday") . '","' . __("Saturday") . '"],' . "\n";
+	echo '        daysSNames: ["' . __("Sun") . '","' . __("Mon") . '","' . __("Tues") . '","' . __("Wed") . '","' . __("Thur") . '","' . __("Fri") . '","' . __("Sat") . '"]' . "\n";
+	echo '        };' . "\n";
+	echo '    var langs = { Today:"' . __("Today") . '"};' . "\n";
+	echo '    return langs;' . "\n";
+	echo '    }' . "\n";
+	echo '</script>' . "\n";
+	}
+	
 // Time to register the .css and .js pages, if we need to of course ;)
 
 // First find out if we're in a post/page list, in a post/page edit page or somewhere we don't care about.
 $fname = SCP_Add_Calendar_Includes();
 
 // If we're somewhere we care about, do the admin_init action.
-if( $fname <> "" ) { add_action( 'admin_init', $fname ); }
+if( $fname <> "" ) 
+	{
+	add_action( 'admin_init', $fname ); 
 
-// If we're in the post/page list, add the quick schedule menu itmes.
+	add_action('admin_print_scripts', 'schedule_posts_calendar_lang' );
+	}
+
+// If we're in the post/page list, add the quick schedule menu items.
 if( $fname == "schedule_posts_calendar_quick_schedule" )
 {
 	add_filter('post_row_actions', 'schedule_posts_calendar_link_row',10,2);
 	add_filter('page_row_actions', 'schedule_posts_calendar_link_row',10,2);
+	
+	add_action('admin_print_scripts', 'schedule_posts_calendar_lang' );
 }
 
 // Now add the admin menu items

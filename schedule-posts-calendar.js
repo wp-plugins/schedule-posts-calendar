@@ -108,6 +108,9 @@ function schedule_posts_calendar_today()
 */
 function AddCalendar()
 {
+	// In the header we let PHP write out a function that uses WordPress' translation function do some work translating the calendar for us, go run the function now so we localize the calendar.
+	var langs = SchedulePostsCalenderLang();
+
 	// Find the timesteampdiv <div> in the current page.
 	var parent = document.getElementById('timestampdiv');
 	
@@ -117,7 +120,7 @@ function AddCalendar()
 	jQuery('.save-timestamp').css('float','left');
 	
 	// Create the today button.
-	todayButton = '<a accesskey="t" href="#" title="Today" class="button-secondary alignleft" onclick="schedule_posts_calendar_today()" style="margin-left:30px">Today</a>';
+	todayButton = '<a accesskey="t" href="#" title="' + langs["Today"] + '" class="button-secondary alignleft" onclick="schedule_posts_calendar_today()" style="margin-left:30px">' + langs["Today"] + '</a>';
 	
 	jQuery( todayButton ).insertBefore('.cancel-timestamp');
 	
@@ -208,6 +211,9 @@ function AddCalendar()
 		SchedulePostsCalendar.setDate(startingDate);
 		SchedulePostsCalendar.setSkin(theme);
 		SchedulePostsCalendar.setDateFormat('%d/%m/%Y %H:%i');
+
+		// We ALWAYS use the same language and let PHP/WordPress do the work translating the calendar for us above.
+		SchedulePostsCalendar.loadUserLanguage("wordpress");
 
 		// Only show the calendar if its inline
 		if( popupCalendar == 0 ) { SchedulePostsCalendar.show(); }

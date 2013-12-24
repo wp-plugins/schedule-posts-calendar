@@ -118,6 +118,12 @@ function AddCalendar(sDay, sMon, sYear, sHour, sMin, id)
 		SchedulePostsCalendar.setSkin(theme);
 		SchedulePostsCalendar.setDateFormat('%d/%m/%Y %H:%i');
 
+		// In the header we let PHP write out a function that uses WordPress' translation function do some work translating the calendar for us, go run the function now so we localize the calendar.
+		SchedulePostsCalenderLang();
+
+		// We ALWAYS use the same language and let PHP/WordPress do the work translating the calendar for us above.
+		SchedulePostsCalendar.loadUserLanguage("wordpress");
+
 		SchedulePostsCalendar.show();
 				
 		// We have to attach two events to the calendar to catch when the user clicks on a new date or time.  They both do the exactly same thing, but the first catches the date change and the second the time change.
@@ -283,6 +289,9 @@ function schedule_posts_calendar_quick_schedule_today(id)
 */
 function schedule_posts_calendar_quick_schedule_edit(id)
 	{
+	// In the header we let PHP write out a function that uses WordPress' translation function do some work translating the calendar for us, go run the function now so we localize the calendar.
+	var langs = SchedulePostsCalenderLang();
+
 	// Find the table row and table we're editing.
 	var edit_row = document.getElementById('post-' + id);
 	var edit_table = edit_row.parentElement;
@@ -351,7 +360,7 @@ function schedule_posts_calendar_quick_schedule_edit(id)
 	// Create the cancel button.
 	new_cell.innerHTML += '<a accesskey="c" href="#" title="Cancel" class="button-secondary cancel alignleft" onclick="schedule_posts_calendar_quick_schedule_cancel(' + id + ')">Cancel</a>';
 	// Create the today button.
-	new_cell.innerHTML += '<a accesskey="t" href="#" title="Today" class="button-secondary alignleft" onclick="schedule_posts_calendar_quick_schedule_today(' + id + ')" style="margin-left:20px">Today</a>';
+	new_cell.innerHTML += '<a accesskey="t" href="#" title="' + langs["Today"] + '" class="button-secondary alignleft" onclick="schedule_posts_calendar_quick_schedule_today()" style="margin-left:20px">' + langs["Today"] + '</a>';
 	// Create the update button.
 	new_cell.innerHTML += '<a accesskey="s" href="#" title="Update" class="button-primary save alignleft" onclick="schedule_posts_calendar_quick_schedule_update(' + id + ')" style="margin-left:20px">Update</a>';
 	// Add a space at the end to give some buffer between the bottom of the buttons and the
