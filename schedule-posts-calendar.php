@@ -406,6 +406,8 @@ function schedule_posts_calendar_lang()
 	{
 	$options = get_option( 'schedule_posts_calendar' );
 
+	if( !isset( $options['enable-translation'] ) ) { $options['enable-translation'] = 1; }
+	
 	echo '<script type="text/javascript">' . "\n";
 	echo 'function SchedulePostsCalenderLang() {' . "\n";
 	echo '    dhtmlXCalendarObject.prototype.langData["wordpress"] = {' . "\n";
