@@ -99,6 +99,18 @@ function schedule_posts_calendar_quick_schedule()
 	wp_enqueue_script( 'schedulepostscalendar' );
 	}
 
+function schedule_posts_calendar_checked_state( $value )
+	{
+	if( $value == 1 ) 
+		{
+		return 1;
+		}
+	else
+		{
+		return 0;
+		}
+	}
+	
 /*
  	This function is called when you select the admin page for the plugin, it generates the HTML
  	and is responsible to store the settings.
@@ -108,31 +120,31 @@ function schedule_posts_calendar_admin_page()
 	$daysoftheweek = array( "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" );
 	$monthsoftheyear = array( "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" );
 
-	if( $_POST['schedule_posts_calendar'] ) 
+	if( array_key_exists( 'schedule_posts_calendar', $_POST ) )
 		{
-		if( !isset( $_POST['schedule_posts_calendar']['startofweek'] ) ) { $_POST['schedule_posts_calendar']['startofweek'] = 7; }
-		if( !isset( $_POST['schedule_posts_calendar']['theme'] ) ) { $_POST['schedule_posts_calendar']['theme'] = 4; }
-		if( !isset( $_POST['schedule_posts_calendar']['hide-timestamp'] ) ) { $_POST['schedule_posts_calendar']['hide-timestamp'] = 0; }
-		if( !isset( $_POST['schedule_posts_calendar']['popup-calendar'] ) ) { $_POST['schedule_posts_calendar']['popup-calendar'] = 0; }
-		if( !isset( $_POST['schedule_posts_calendar']['enable-translation'] ) ) { $_POST['schedule_posts_calendar']['enable-translation'] = 1; }
-		if( !isset( $_POST['schedule_posts_calendar']['override-translation'] ) ) { $_POST['schedule_posts_calendar']['override-translation'] = 0; }
+		if( empty( $_POST['schedule_posts_calendar']['startofweek'] ) ) { $_POST['schedule_posts_calendar']['startofweek'] = 7; }
+		if( empty( $_POST['schedule_posts_calendar']['theme'] ) ) { $_POST['schedule_posts_calendar']['theme'] = 4; }
+		$_POST['schedule_posts_calendar']['hide-timestamp'] = schedule_posts_calendar_checked_state( $_POST['schedule_posts_calendar']['hide-timestamp'] );
+		$_POST['schedule_posts_calendar']['popup-calendar'] = schedule_posts_calendar_checked_state( $_POST['schedule_posts_calendar']['popup-calendar'] );
+		$_POST['schedule_posts_calendar']['enable-translation'] = schedule_posts_calendar_checked_state( $_POST['schedule_posts_calendar']['enable-translation'] );
+		$_POST['schedule_posts_calendar']['override-translation'] = schedule_posts_calendar_checked_state( $_POST['schedule_posts_calendar']['override-translation'] );
 
 		foreach( $monthsoftheyear as $month )
 			{
-			if( !isset( $_POST['schedule_posts_calendar']['FMN'.$month] ) ) { $_POST['schedule_posts_calendar']['FMN'.$month] = __( $month ); }
-			if( !isset( $_POST['schedule_posts_calendar']['SMN'.$month] ) ) { $_POST['schedule_posts_calendar']['SMN'.$month] = __( date( "M", strtotime( $month ) ) ); }
+			if( empty( $_POST['schedule_posts_calendar']['FMN'.$month] ) ) { $_POST['schedule_posts_calendar']['FMN'.$month] = __( $month ); }
+			if( empty( $_POST['schedule_posts_calendar']['SMN'.$month] ) ) { $_POST['schedule_posts_calendar']['SMN'.$month] = __( date( "M", strtotime( $month ) ) ); }
 			}
 		
 		foreach( $daysoftheweek as $day )
 			{
-			if( !isset( $_POST['schedule_posts_calendar']['FDN'.$day] ) ) { $_POST['schedule_posts_calendar']['FDN'.$day] = __( $day ); }
-			if( !isset( $_POST['schedule_posts_calendar']['SDN'.$day] ) ) { $_POST['schedule_posts_calendar']['SDN'.$day] = __( date( "D", strtotime( $day ) ) ); }
+			if( empty( $_POST['schedule_posts_calendar']['FDN'.$day] ) ) { $_POST['schedule_posts_calendar']['FDN'.$day] = __( $day ); }
+			if( empty( $_POST['schedule_posts_calendar']['SDN'.$day] ) ) { $_POST['schedule_posts_calendar']['SDN'.$day] = __( date( "D", strtotime( $day ) ) ); }
 			}
 
-		if( !isset( $_POST['schedule_posts_calendar']['Cancel'] ) ) { $_POST['schedule_posts_calendar']['Cancel'] = __("Cancel"); }
-		if( !isset( $_POST['schedule_posts_calendar']['OK'] ) ) { $_POST['schedule_posts_calendar']['Ok'] = __("OK"); }
-		if( !isset( $_POST['schedule_posts_calendar']['Today'] ) ) { $_POST['schedule_posts_calendar']['Today'] = __("Today"); }
-		if( !isset( $_POST['schedule_posts_calendar']['Update'] ) ) { $_POST['schedule_posts_calendar']['Update'] = __("Update"); }
+		if( empty( $_POST['schedule_posts_calendar']['Cancel'] ) ) { $_POST['schedule_posts_calendar']['Cancel'] = __("Cancel"); }
+		if( empty( $_POST['schedule_posts_calendar']['OK'] ) ) { $_POST['schedule_posts_calendar']['Ok'] = __("OK"); }
+		if( empty( $_POST['schedule_posts_calendar']['Today'] ) ) { $_POST['schedule_posts_calendar']['Today'] = __("Today"); }
+		if( empty( $_POST['schedule_posts_calendar']['Update'] ) ) { $_POST['schedule_posts_calendar']['Update'] = __("Update"); }
 			
 		update_option( 'schedule_posts_calendar', $_POST['schedule_posts_calendar'] );
 		
@@ -141,29 +153,29 @@ function schedule_posts_calendar_admin_page()
 
 	$options = get_option( 'schedule_posts_calendar' );
 
-	if( !isset( $options['startofweek'] ) ) { $options['startofweek'] = 7; }
-	if( !isset( $options['theme'] ) ) { $options['theme'] = 4; }
-	if( !isset( $options['hide-timestamp'] ) ) { $options['hide-timestamp'] = 0; }
-	if( !isset( $options['popup-calendar'] ) ) { $options['popup-calendar'] = 0; }
-	if( !isset( $options['enable-translation'] ) ) { $options['enable-translation'] = 1; }
-	if( !isset( $options['override-translation'] ) ) { $options['override-translation'] = 0; }
+	if( !array_key_exists( 'startofweek', $options ) ) { $options['startofweek'] = 7; }
+	if( !array_key_exists( 'theme', $options ) ) { $options['theme'] = 4; }
+	if( !array_key_exists( 'hide-timestamp', $options ) ) { $options['hide-timestamp'] = 0; }
+	if( !array_key_exists( 'popup-calendar', $options ) ) { $options['popup-calendar'] = 0; }
+	if( !array_key_exists( 'enable-translation', $options ) ) { $options['enable-translation'] = 1; }
+	if( !array_key_exists( 'override-translation', $options ) ) { $options['override-translation'] = 0; }
 
 	foreach( $monthsoftheyear as $month )
 		{
-		if( !isset( $options['FMN'.$month] ) ) { $options['FMN'.$month] = __( $month ); }
-		if( !isset( $options['SMN'.$month] ) ) { $options['SMN'.$month] = __( $month ); }
+		if( !array_key_exists( 'FMN'.$month, $options ) ) { $options['FMN'.$month] = __( $month ); }
+		if( !array_key_exists( 'SMN'.$month, $options ) ) { $options['SMN'.$month] = __( $month ); }
 		}
 	
 	foreach( $daysoftheweek as $day )
 		{
-		if( !isset( $options['FDN'.$day] ) ) { $options['FDN'.$day] = __( $day ); }
-		if( !isset( $options['SDN'.$day] ) ) { $options['SDN'.$day] = __( $day ); }
+		if( !array_key_exists( 'FDN'.$day, $options ) ) { $options['FDN'.$day] = __( $day ); }
+		if( !array_key_exists( 'SDN'.$day, $options ) ) { $options['SDN'.$day] = __( $day ); }
 		}
 
-	if( !isset( $options['Cancel'] ) ) { $options['Cancel'] = __("Cancel"); }
-	if( !isset( $options['OK'] ) ) { $options['OK'] = __("OK"); }
-	if( !isset( $options['Today'] ) ) { $options['Today'] = __("Today"); }
-	if( !isset( $options['Update'] ) ) {$options['Update'] = __("Update"); }
+	if( !array_key_exists( 'Cancel', $options ) ) { $options['Cancel'] = __("Cancel"); }
+	if( !array_key_exists( 'OK', $options ) ) { $options['OK'] = __("OK"); }
+	if( !array_key_exists( 'Today', $options ) ) { $options['Today'] = __("Today"); }
+	if( !array_key_exists( 'Update', $options ) ) { $options['Update'] = __("Update"); }
 
 	//***** Start HTML
 	?>
@@ -424,7 +436,7 @@ function schedule_posts_calendar_lang()
 	echo 'function SchedulePostsCalenderLang() {' . "\n";
 	
 	// Check to see if translation is enabled
-	if( $options['enable-translation'] == 0 )
+	if( $options['enable-translation'] == 1 )
 		{
 		// Let's create the update code for the dhtmlXCalendar.
 		echo '    dhtmlXCalendarObject.prototype.langData["wordpress"] = {' . "\n";
