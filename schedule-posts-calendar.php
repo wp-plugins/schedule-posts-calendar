@@ -399,7 +399,7 @@ function schedule_posts_calendar_admin()
 */
 function schedule_posts_calendar_link_row($actions, $post) 
 	{
-	$actions['schedule'] = '<a href="#" class="editinlineschedule" title="Schedule this item" onClick="schedule_posts_calendar_quick_schedule_edit(' . $post->ID . ');">Schedule</a>';
+	$actions['schedule'] = '<a href="#" class="editinlineschedule" title="Schedule this item" onClick="schedule_posts_calendar_quick_schedule_edit(' . $post->ID . ');">' . __('Schedule') . '</a>';
 		
 	return $actions;
 	}
@@ -409,7 +409,7 @@ function schedule_posts_calendar_link_row($actions, $post)
 */
 function schedule_posts_calendar_plugin_actions( $actions, $plugin_file, $plugin_data, $context ) 
 	{
-	array_unshift( $actions, '<a href="' . admin_url() . 'options-general.php?page=schedule-posts-calendar.php">Settings</a>' );
+	array_unshift( $actions, '<a href="' . admin_url() . 'options-general.php?page=schedule-posts-calendar.php">' . __('Settings') . '</a>' );
 	
 	return $actions;
 	}
