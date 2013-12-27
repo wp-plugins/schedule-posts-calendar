@@ -5,7 +5,7 @@ Author URI: http://toolstack.com
 Tags: admin posts calendar
 Requires at least: 3.0.0
 Tested up to: 3.8.0
-Stable tag: 4.0
+Stable tag: 4.1
 
 Adds a JavaScript calendar to the scheduled publish widget to allow you to select a date and time graphically instead of via the text entry boxes.
 
@@ -47,6 +47,10 @@ If you are using IE in compatibility mode the calendar will overlap other areas,
 7. The schedule mode in the posts/pages list.
 
 == Changelog ==
+= 4.1 =
+* Fixed bug in translation code, enable/disable logic was inverted
+* Fixed bug in preferences code, would not allow you to disable translations
+
 = 4.0 =
 * Added language support.
 
@@ -95,8 +99,8 @@ If you are using IE in compatibility mode the calendar will overlap other areas,
 * Initial release.
 
 == Upgrade Notice ==
-= 4.0 =
-The plugin now follows the WordPress language setting by default, go to the options page if you want to disable or override the settings.
+= 4.1 =
+None.
 
 == Roadmap ==
 * None at this time.
