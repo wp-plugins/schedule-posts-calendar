@@ -458,7 +458,7 @@ function schedule_posts_calendar_lang()
 			echo '        monthesFNames: ["' . __("January") . '","' . __("February") . '","' . __("March") . '","' . __("April") . '","' . __("May") . '","' . __("June") . '","' . __("July") . '","' . __("August") . '","' . __("September") . '","' . __("October") . '","' . __("November") . '","' . __("December") . '"],' . "\n";
 			echo '        monthesSNames: ["' . __("Jan") . '","' . __("Feb") . '","' . __("Mar") . '","' . __("Apr") . '","' . __("May") . '","' . __("Jun") . '","' . __("Jul") . '","' . __("Aug") . '","' . __("Sep") . '","' . __("Oct") . '","' . __("Nov") . '","' . __("Dec") . '"],' . "\n";
 			echo '        daysFNames: ["' . __("Sunday") . '","' . __("Monday") . '","' . __("Tuesday") . '","' . __("Wednesday") . '","' . __("Thursday") . '","' . __("Friday") . '","' . __("Saturday") . '"],' . "\n";
-			echo '        daysSNames: ["' . __("Sun") . '","' . __("Mon") . '","' . __("Tues") . '","' . __("Wed") . '","' . __("Thur") . '","' . __("Fri") . '","' . __("Sat") . '"]' . "\n";
+			echo '        daysSNames: ["' . __("Sun") . '","' . __("Mon") . '","' . __("Tue") . '","' . __("Wed") . '","' . __("Thu") . '","' . __("Fri") . '","' . __("Sat") . '"]' . "\n";
 			echo '        };' . "\n";
 			echo '    var langs = { Today:"' . __("Today") . '", Cancel:"' . __("Cancel") . '", Update:"' . __("Update") . '", OK:"' . __("OK") . '"};' . "\n";
 			}
