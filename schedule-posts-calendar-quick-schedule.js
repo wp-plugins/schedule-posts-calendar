@@ -113,16 +113,19 @@ function AddCalendar(sDay, sMon, sYear, sHour, sMin, id)
 
 		// Finally create the calendar and replace the <div>/<input> we inserted earlier with the proper calendar control.  Also, set the calendar display properties and then finally show the control.
 		SchedulePostsCalendar = new dhtmlXCalendarObject("calendarHere-" + id);
-		SchedulePostsCalendar.setWeekStartDay(startOfWeek);
-		SchedulePostsCalendar.setDate(startingDate);
-		SchedulePostsCalendar.setSkin(theme);
-		SchedulePostsCalendar.setDateFormat('%d/%m/%Y %H:%i');
 
 		// In the header we let PHP write out a function that uses WordPress' translation function do some work translating the calendar for us, go run the function now so we localize the calendar.
 		SchedulePostsCalenderLang();
 
 		// We ALWAYS use the same language and let PHP/WordPress do the work translating the calendar for us above.
+		// Note: loadUserLangauge needs to be loaded before the rest of the options are set otherwise it can
+		// overwrite some of them.
 		SchedulePostsCalendar.loadUserLanguage("wordpress");
+
+		SchedulePostsCalendar.setWeekStartDay(startOfWeek);
+		SchedulePostsCalendar.setDate(startingDate);
+		SchedulePostsCalendar.setSkin(theme);
+		SchedulePostsCalendar.setDateFormat('%d/%m/%Y %H:%i');
 
 		SchedulePostsCalendar.show();
 				
