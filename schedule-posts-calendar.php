@@ -101,16 +101,17 @@ function schedule_posts_calendar_quick_schedule()
 	wp_enqueue_script( 'schedulepostscalendar' );
 	}
 
-function schedule_posts_calendar_checked_state( $value )
+function schedule_posts_calendar_checked_state( $value, $key )
 	{
-	if( $value == 1 ) 
+	if( array_key_exists( $key, $value ) )
 		{
-		return 1;
+		if( $value[$key] == 1 ) 
+			{
+			return 1;
+			}
 		}
-	else
-		{
-		return 0;
-		}
+
+	return 0;
 	}
 	
 /*
@@ -126,10 +127,10 @@ function schedule_posts_calendar_admin_page()
 		{
 		if( empty( $_POST['schedule_posts_calendar']['startofweek'] ) ) { $_POST['schedule_posts_calendar']['startofweek'] = 7; }
 		if( empty( $_POST['schedule_posts_calendar']['theme'] ) ) { $_POST['schedule_posts_calendar']['theme'] = 4; }
-		$_POST['schedule_posts_calendar']['hide-timestamp'] = schedule_posts_calendar_checked_state( $_POST['schedule_posts_calendar']['hide-timestamp'] );
-		$_POST['schedule_posts_calendar']['popup-calendar'] = schedule_posts_calendar_checked_state( $_POST['schedule_posts_calendar']['popup-calendar'] );
-		$_POST['schedule_posts_calendar']['enable-translation'] = schedule_posts_calendar_checked_state( $_POST['schedule_posts_calendar']['enable-translation'] );
-		$_POST['schedule_posts_calendar']['override-translation'] = schedule_posts_calendar_checked_state( $_POST['schedule_posts_calendar']['override-translation'] );
+		$_POST['schedule_posts_calendar']['hide-timestamp'] = schedule_posts_calendar_checked_state( $_POST['schedule_posts_calendar'], 'hide-timestamp' );
+		$_POST['schedule_posts_calendar']['popup-calendar'] = schedule_posts_calendar_checked_state( $_POST['schedule_posts_calendar'], 'popup-calendar' );
+		$_POST['schedule_posts_calendar']['enable-translation'] = schedule_posts_calendar_checked_state( $_POST['schedule_posts_calendar'], 'enable-translation' );
+		$_POST['schedule_posts_calendar']['override-translation'] = schedule_posts_calendar_checked_state( $_POST['schedule_posts_calendar'], 'override-translation' );
 
 		foreach( $monthsoftheyear as $month )
 			{
