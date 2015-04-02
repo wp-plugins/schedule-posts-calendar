@@ -8,7 +8,7 @@ var SchedulePostsCalendar = null;
 	
 	name = the file name of the script to look for
 */
-function GetScriptIndex(name)
+function scp_get_script_index(name)
 {
 	// Loop through all the scripts in the current document to find the one we want.
 	for( i = 0; i < document.scripts.length; i++) 
@@ -30,7 +30,7 @@ function GetScriptIndex(name)
 /*
 	This function returns the value of a variable passed on the URI of a JavaScript file.
 */
-function GetScriptVariable(index, name, vardef)
+function scp_get_script_variable(index, name, vardef)
 {
 	// If a negative index has been passed in it's because we didn't find any matching script with a query
 	// string, so just return the default value.
@@ -68,9 +68,34 @@ function GetScriptVariable(index, name, vardef)
 }
 
 /*
+	This function will copy the color attributes from the current admin theme and create a new style sheet to use them in the calendar.
+*/
+function scp_copy_admin_theme() {
+	var background = jQuery('.wp-has-current-submenu .wp-menu-open' ).css("background-color");
+	var foreground = jQuery('.wp-has-current-submenu .wp-menu-open' ).css("color");
+	
+	var style = document.createElement('style');
+	style.type = 'text/css';
+	style.innerHTML = '.dhtmlxcalendar_wordpress div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_month_date { color: ' + foreground + '; background-color: ' + background + ' !important; }' 
+					+ '.dhtmlxcalendar_wordpress div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_month_date_hover { color: ' + foreground + '; background-color: ' + background + ' !important; }'
+					+ '.dhtmlxcalendar_wordpress div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_hover { color: ' + foreground + '; background-color: ' + background + ' !important; }'
+					+ '.dhtmlxcalendar_wordpress div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_weekend_hover { color: ' + foreground + '; background-color: ' + background + ' !important; }'
+					+ '.dhtmlxcalendar_wordpress div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_month_hover { color: ' + foreground + '; background-color: ' + background + ' !important; }'
+					+ '.dhtmlxcalendar_wordpress div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_month_weekend { color: ' + background + ' !important; }'
+					+ '.dhtmlxcalendar_wordpress div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_month_weekend_hover { color: ' + foreground + '; background-color: ' + background + ' !important; }'
+					+ '.dhtmlxcalendar_wordpress div.dhtmlxcalendar_days_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_day_weekday_cell { color: ' + background + ' !important; }'
+					+ '.dhtmlxcalendar_wordpress div.dhtmlxcalendar_days_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_day_weekday_cell_first { color: ' + background + ' !important; }'
+					+ '.dhtmlxcalendar_wordpress div.dhtmlxcalendar_selector_obj table.dhtmlxcalendar_selector_table td.dhtmlxcalendar_selector_cell_middle ul li.dhtmlxcalendar_selector_cell_active, .dhtmlxcalendar_wordpress div.dhtmlxcalendar_selector_obj table.dhtmlxcalendar_selector_table td.dhtmlxcalendar_selector_cell_middle ul li.dhtmlxcalendar_selector_cell_hover { color: ' + foreground + '; background-color: ' + background + ' !important; }'
+					;
+	
+	
+	document.getElementsByTagName('head')[0].appendChild(style);
+}
+
+/*
 	This function adds the JavaScript calendar to the html elements in the quick edit area.
 */
-function AddCalendar(sDay, sMon, sYear, sHour, sMin, id)
+function scp_add_calendar(sDay, sMon, sYear, sHour, sMin, id)
 {
 	// Find the timesteampdiv <div> in the current page.
 	var parent = document.getElementById('calendarHere-' + id);
@@ -79,17 +104,17 @@ function AddCalendar(sDay, sMon, sYear, sHour, sMin, id)
 	if( parent )
 		{
 		// Retrieve the script options from the URI
-		var GSI = GetScriptIndex('schedule-posts-calendar-quick-schedule.js');
-		var startOfWeek = GetScriptVariable(GSI, 'startofweek', 7);
-		var themenumber = GetScriptVariable(GSI, 'theme', 'omega');
-		var popupCalendar = GetScriptVariable(GSI, 'popupcalendar', 0);
+		var GSI = scp_get_script_index('schedule-posts-calendar-quick-schedule.js');
+		var startOfWeek = scp_get_script_variable(GSI, 'startofweek', 7);
+		var themenumber = scp_get_script_variable(GSI, 'theme', 'omega');
+		var popupCalendar = scp_get_script_variable(GSI, 'popupcalendar', 0);
 		var theme = '';
 
 		switch( themenumber )
 			{
 			case '4':
 				theme = 'dhx_terrace';
-				parent.style.height = '250px';
+				parent.style.height = '300px';
 				break;
 			case '3':
 				theme = 'dhx_web';
@@ -98,7 +123,8 @@ function AddCalendar(sDay, sMon, sYear, sHour, sMin, id)
 				theme = 'dhx_skyblue';
 				break;
 			default:
-				theme = 'omega';
+				theme = 'wordpress';
+				parent.style.height = '300px';
 				break;
 			}
 
@@ -129,12 +155,17 @@ function AddCalendar(sDay, sMon, sYear, sHour, sMin, id)
 
 		SchedulePostsCalendar.show();
 				
+	
+		if( theme == 'wordpress' ) {
+				scp_copy_admin_theme();
+			}
+
 		// We have to attach two events to the calendar to catch when the user clicks on a new date or time.  They both do the exactly same thing, but the first catches the date change and the second the time change.
 		var myEvent = SchedulePostsCalendar.attachEvent("onClick", function (selectedDate){
-				document.getElementById('eis_date_value_' + id).value = eis_format_date( selectedDate.getDate(), selectedDate.getMonth()+1, selectedDate.getFullYear(), selectedDate.getHours(), selectedDate.getMinutes() );
+				document.getElementById('eis_date_value_' + id).value = scp_eis_format_date( selectedDate.getDate(), selectedDate.getMonth()+1, selectedDate.getFullYear(), selectedDate.getHours(), selectedDate.getMinutes() );
 				})
 		var myEvent = SchedulePostsCalendar.attachEvent("onChange", function (selectedDate){
-				document.getElementById('eis_date_value_' + id).value = eis_format_date( selectedDate.getDate(), selectedDate.getMonth()+1, selectedDate.getFullYear(), selectedDate.getHours(), selectedDate.getMinutes() );
+				document.getElementById('eis_date_value_' + id).value = scp_eis_format_date( selectedDate.getDate(), selectedDate.getMonth()+1, selectedDate.getFullYear(), selectedDate.getHours(), selectedDate.getMinutes() );
 				})
 	}
 }
@@ -142,7 +173,7 @@ function AddCalendar(sDay, sMon, sYear, sHour, sMin, id)
 /*
 	This function creates a zero padded date string.
 */
-function eis_format_date(sDay, sMon, sYear, sHour, sMin)
+function scp_eis_format_date(sDay, sMon, sYear, sHour, sMin)
 	{
 	// Format a date to match the calendar format
 	var dateString = '';
@@ -163,7 +194,7 @@ function eis_format_date(sDay, sMon, sYear, sHour, sMin)
 	
 	id = the WordPress post/page id to update
 */
-function schedule_posts_calendar_quick_schedule_update(id)
+function scp_calendar_quick_schedule_update(id)
 	{
 	// Commit a schedule change to WordPress
 	
@@ -234,7 +265,7 @@ function schedule_posts_calendar_quick_schedule_update(id)
 							}
 						}
 
-					schedule_posts_calendar_quick_schedule_cancel(id);
+					scp_calendar_quick_schedule_cancel(id);
 				}
 			}
 		}
@@ -247,7 +278,7 @@ function schedule_posts_calendar_quick_schedule_update(id)
 
 	id = the WordPress post/page id to cancel
 */
-function schedule_posts_calendar_quick_schedule_cancel(id)
+function scp_calendar_quick_schedule_cancel(id)
 	{
 	// Find the table row we're editing.
 	var show_row = document.getElementById('post-' + id);
@@ -276,13 +307,13 @@ function schedule_posts_calendar_quick_schedule_cancel(id)
 
 	id = the WordPress post/page id to cancel
 */
-function schedule_posts_calendar_quick_schedule_today(id)
+function scp_calendar_quick_schedule_today(id)
 	{
 	var currentDate = new Date();
 
 	SchedulePostsCalendar.setDate(currentDate);
 	
-	document.getElementById('eis_date_value_' + id).value = eis_format_date( currentDate.getDate(), currentDate.getMonth()+1, currentDate.getFullYear(), currentDate.getHours(), currentDate.getMinutes() );
+	document.getElementById('eis_date_value_' + id).value = scp_eis_format_date( currentDate.getDate(), currentDate.getMonth()+1, currentDate.getFullYear(), currentDate.getHours(), currentDate.getMinutes() );
 	}
 	
 /*
@@ -290,7 +321,7 @@ function schedule_posts_calendar_quick_schedule_today(id)
 
 	id = the WordPress post/page id to cancel
 */
-function schedule_posts_calendar_quick_schedule_edit(id)
+function scp_calendar_quick_schedule_edit(id)
 	{
 	// In the header we let PHP write out a function that uses WordPress' translation function do some work translating the calendar for us, go run the function now so we localize the calendar.
 	var langs = SchedulePostsCalenderLang();
@@ -361,17 +392,17 @@ function schedule_posts_calendar_quick_schedule_edit(id)
 	// Create a div to create the calendar in.
 	new_cell.innerHTML += "<div id='calendarHere-" + id + "' style='position:relative;height:230px;'></div>";
 	// Create the cancel button.
-	new_cell.innerHTML += '<a accesskey="c" href="#" title="' + langs["Cancel"] + '" class="button-secondary cancel alignleft" onclick="schedule_posts_calendar_quick_schedule_cancel(' + id + ')">' + langs["Cancel"] + '</a>';
+	new_cell.innerHTML += '<a accesskey="c" href="#" title="' + langs["Cancel"] + '" class="button-secondary cancel alignleft" onclick="scp_calendar_quick_schedule_cancel(' + id + ')">' + langs["Cancel"] + '</a>';
 	// Create the today button.
-	new_cell.innerHTML += '<a accesskey="t" href="#" title="' + langs["Today"] + '" class="button-secondary alignleft" onclick="schedule_posts_calendar_quick_schedule_today()" style="margin-left:20px">' + langs["Today"] + '</a>';
+	new_cell.innerHTML += '<a accesskey="t" href="#" title="' + langs["Today"] + '" class="button-secondary alignleft" onclick="scp_calendar_quick_schedule_today()" style="margin-left:20px">' + langs["Today"] + '</a>';
 	// Create the update button.
-	new_cell.innerHTML += '<a accesskey="s" href="#" title="' + langs["Update"] + '" class="button-primary save alignleft" onclick="schedule_posts_calendar_quick_schedule_update(' + id + ')" style="margin-left:20px">' + langs["Update"] + '</a>';
+	new_cell.innerHTML += '<a accesskey="s" href="#" title="' + langs["Update"] + '" class="button-primary save alignleft" onclick="scp_calendar_quick_schedule_update(' + id + ')" style="margin-left:20px">' + langs["Update"] + '</a>';
 	// Add a space at the end to give some buffer between the bottom of the buttons and the
 	// next row.
 	new_cell.innerHTML += "<BR>&nbsp;";
 	
 	// Now create the calendar.
-	AddCalendar(day, month-1, year, hour, minute, id);
+	scp_add_calendar(day, month-1, year, hour, minute, id);
 	
 	// Hide the WordPress post row.
 	edit_row.style.display = "none";

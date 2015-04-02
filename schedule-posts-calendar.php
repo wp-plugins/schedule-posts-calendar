@@ -30,16 +30,16 @@ function schedule_posts_calendar_add_cal($theme_num, $url)
 	switch( $theme_num )
 		{
 		case 2:
-			wp_register_style( 'dhtmlxcalendar_style', $url . '/skins/dhtmlxcalendar_dhx_skyblue.css' );
+			wp_register_style( 'dhtmlxcalendar_style', $url . '/skins/skyblue/dhtmlxcalendar.css' );
 			break;
 		case 3:
-			wp_register_style( 'dhtmlxcalendar_style', $url . '/skins/dhtmlxcalendar_dhx_web.css' );
+			wp_register_style( 'dhtmlxcalendar_style', $url . '/skins/web/dhtmlxcalendar.css' );
 			break;
 		case 4:
-			wp_register_style( 'dhtmlxcalendar_style', $url . '/skins/dhtmlxcalendar_dhx_terrace.css' );
+			wp_register_style( 'dhtmlxcalendar_style', $url . '/skins/terrace/dhtmlxcalendar.css' );
 			break;
 		default:
-			wp_register_style( 'dhtmlxcalendar_style', $url . '/skins/dhtmlxcalendar_omega.css' );
+			wp_register_style( 'dhtmlxcalendar_style', $url . '/skins/wordpress/dhtmlxcalendar.css' );
 			break;
 		}
 
@@ -202,7 +202,7 @@ function schedule_posts_calendar_admin_page()
 		
 		<div><?php _e('Calendar theme');?>: <Select name="schedule_posts_calendar[theme]">
 <?php
-		$themes = array( "Omega", "Sky Blue", "Web", "Terrace" );
+		$themes = array( "WordPress", "Sky Blue", "Web", "Terrace" );
 		
 		for( $i = 0; $i < 4; $i++ )
 			{
@@ -221,7 +221,7 @@ function schedule_posts_calendar_admin_page()
 			
 			<div><input name="schedule_posts_calendar[popup-calendar]" type="checkbox" value="1" <?php checked($options['popup-calendar'], 1); ?> /> <?php _e("Use a popup calendar instead of an inline one (you probably want to hide the default dispaly above)"); ?></div>
 
-			<div class="submit"><input type="submit" name="info_update" value="<?php _e('Update Options') ?> &raquo;" /></div>
+			<div class="submit"><input type="submit" name="info_update" class="button-primary" value="<?php _e('Update Options') ?>" /></div>
 			
 	</fieldset>
 		
@@ -333,7 +333,7 @@ function schedule_posts_calendar_admin_page()
 			?>
 		</table>
 		
-		<div class="submit"><input type="submit" name="info_update" value="<?php _e('Update Options') ?> &raquo;" /></div>
+		<div class="submit"><input type="submit" name="info_update" class="button-primary" value="<?php _e('Update Options') ?>" /></div>
 		
 	</fieldset>
 	
@@ -402,7 +402,7 @@ function schedule_posts_calendar_admin()
 */
 function schedule_posts_calendar_link_row($actions, $post) 
 	{
-	$actions['schedule'] = '<a href="#" class="editinlineschedule" title="Schedule this item" onClick="schedule_posts_calendar_quick_schedule_edit(' . $post->ID . ');">' . __('Schedule') . '</a>';
+	$actions['schedule'] = '<a href="#" class="editinlineschedule" title="Schedule this item" onClick="scp_calendar_quick_schedule_edit(' . $post->ID . ');">' . __('Schedule') . '</a>';
 		
 	return $actions;
 	}
