@@ -47,6 +47,11 @@ If you are using IE in compatibility mode the calendar will overlap other areas,
 7. The schedule mode in the posts/pages list.
 
 == Changelog ==
+= 5.0 =
+* Added "wordpress" theme that copies the colors from the current wordpress admin theme.
+* Updated calendar code to v4.1.3.
+* Updated default calendar style to the new "wordpress" theme.
+
 = 4.3 =
 * Fixed bug with the start of week setting that was being overwritten.
 
