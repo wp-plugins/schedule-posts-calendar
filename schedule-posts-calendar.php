@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Schedule Posts Calendar
-Version: 4.3
+Version: 5.0
 Plugin URI: http://toolstack.com/SchedulePostsCalendar
 Author: Greg Ross
 Author URI: http://toolstack.com
@@ -11,12 +11,12 @@ Compatible with WordPress 3+.
 
 Read the accompanying readme.txt file for instructions and documentation.
 
-Copyright (c) 2012-13 by Greg Ross
+Copyright (c) 2012-15 by Greg Ross
 
 This software is released under the GPL v2.0, see license.txt for details
 */
 
-define( 'SCHEDULEPOSTCALENDARVERSION', '4.3' );
+define( 'SCHEDULEPOSTCALENDARVERSION', '5.0' );
 
 /*
  	This function is called to add the .css and .js files for the calendar to 

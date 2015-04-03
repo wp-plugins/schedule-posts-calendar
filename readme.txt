@@ -2,10 +2,10 @@
 Contributors: GregRoss
 Plugin URI: http://toolstack.com/schedulepostscalendar
 Author URI: http://toolstack.com
-Tags: admin posts calendar
+Tags: admin, posts, calendar
 Requires at least: 3.0.0
 Tested up to: 4.2
-Stable tag: 4.3
+Stable tag: 5.0
 
 Adds a JavaScript calendar to the scheduled publish widget to allow you to select a date and time graphically instead of via the text entry boxes.
 
