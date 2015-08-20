@@ -70,11 +70,16 @@ function schedule_posts_calendar()
 	schedule_posts_calendar_add_cal( $options['theme'], $plugin_url );
 	
 	// Add the css file that will hide the default WordPress timestamp field.
-	if( $options['hide-timestamp'] == 1 )
+	if( array_key_exists( 'hide-timestamp', $options ) && $options['hide-timestamp'] == 1 )
 		{
 		wp_register_style( 'hide-timestamp', $plugin_url . '/hide-timestamp.css' );
 		wp_enqueue_style( 'hide-timestamp' );
 		}
+	
+
+	if( ! array_key_exists( 'theme', $options ) ) { $options['theme'] = false; }
+	if( ! array_key_exists( 'startofweek', $options ) ) { $options['startofweek'] = false; }
+	if( ! array_key_exists( 'popup-calendar', $options ) ) { $options['popup-calendar'] = false; }
 	
 	// Register and enqueue the calender scripts.
 	wp_register_script( 'schedulepostscalendar', $plugin_url . '/schedule-posts-calendar.js?theme=' . $options['theme'] . '&startofweek=' . $options['startofweek'] . '&popupcalendar=' . $options['popup-calendar'], "dhtmlxcalendar" );
